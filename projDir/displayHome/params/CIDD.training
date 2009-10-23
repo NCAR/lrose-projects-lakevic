@@ -163,14 +163,14 @@ satellite 10.8IR   mdvp::KtoC//localhost::$(DATA_DIR)/mdv/satellite/meteosat-11&
 satellite 12.0micron  mdvp::KtoC//localhost::$(DATA_DIR)/mdv/satellite/meteosat-11&12.0micron ch4_green.colors   C  0 0 0   cart  1 0
 satellite ======   mdvp:://localhost::$(DATA_DIR)/unused&unused         dbz.colors   dbz   0 0 0   cart  1 0
 
-satellite ======   mdvp:://localhost::$(DATA_DIR)/unused&unused         dbz.colors   dbz   0 0 0   cart  1 0
-satellite ======   mdvp:://localhost::$(DATA_DIR)/unused&unused         dbz.colors   dbz   0 0 0   cart  1 0
-satellite ======   mdvp:://localhost::$(DATA_DIR)/unused&unused         dbz.colors   dbz   0 0 0   cart  1 0
-satellite ======   mdvp:://localhost::$(DATA_DIR)/unused&unused         dbz.colors   dbz   0 0 0   cart  1 0
-satellite MSG1_6.2micron    mdvp:://ocn3.rap.ucar.edu::bci2/mdv/satellite/MSG1/wv&wv_062 ch3_64.colors      C  0 0 0   cart  1 0
-satellite MSG1_10.8micron   mdvp:://ocn3.rap.ucar.edu::bci2/mdv/satellite/MSG1/ir&ir_108 ch4_green.colors   C  0 0 0   cart  1 0
-satellite ______   mdvp:://localhost::$(DATA_DIR)/unused&unused         dbz.colors   dbz   0 0 0   cart  1 0
-satellite ______   mdvp:://localhost::$(DATA_DIR)/unused&unused         dbz.colors   dbz   0 0 0   cart  1 0
+#satellite ======   mdvp:://localhost::$(DATA_DIR)/unused&unused         dbz.colors   dbz   0 0 0   cart  1 0
+#satellite ======   mdvp:://localhost::$(DATA_DIR)/unused&unused         dbz.colors   dbz   0 0 0   cart  1 0
+#satellite ======   mdvp:://localhost::$(DATA_DIR)/unused&unused         dbz.colors   dbz   0 0 0   cart  1 0
+#satellite ======   mdvp:://localhost::$(DATA_DIR)/unused&unused         dbz.colors   dbz   0 0 0   cart  1 0
+#satellite MSG1_6.2micron    mdvp:://ocn3.rap.ucar.edu::bci2/mdv/satellite/MSG1/wv&wv_062 ch3_64.colors      C  0 0 0   cart  1 0
+#satellite MSG1_10.8micron   mdvp:://ocn3.rap.ucar.edu::bci2/mdv/satellite/MSG1/ir&ir_108 ch4_green.colors   C  0 0 0   cart  1 0
+#satellite ______   mdvp:://localhost::$(DATA_DIR)/unused&unused         dbz.colors   dbz   0 0 0   cart  1 0
+#satellite ______   mdvp:://localhost::$(DATA_DIR)/unused&unused         dbz.colors   dbz   0 0 0   cart  1 0
 
 terrain ======   mdvp:://localhost::$(DATA_DIR)/unused&unused         dbz.colors   dbz   0 0 0   cart  1 0
 terrain ======   mdvp:://localhost::$(DATA_DIR)/unused&unused         dbz.colors   dbz   0 0 0   cart  1 0
@@ -281,7 +281,7 @@ UKMO_10m mdvp:://localhost::$(DATA_DIR)/mdv/model/African/Winds&  Uwind10m Vwind
 
 countries      countries      ne_10m_admin_0_countries.shp 2  0.0 10000.0  gray20
 lakes          lakes          ne_10m_lakes.shp             2  0.0 10000.0  blue
-TZ_regions     TZ_regions     Tanzania_regions_2014.shp    0  0.0 10000.0  gray20
+# TZ_regions     TZ_regions     Tanzania_regions_2014.shp    0  0.0 10000.0  gray20
 EA_radars      EA_radars      eastAfrica_radars.map        1  0.0 10000.0  red 
 TZ_water_areas TZ_water_areas TZA_water_areas_dcw.shp      0  0.0 10000.0  blue
 </MAPS>
@@ -674,11 +674,12 @@ cidd.num_cache_zooms:       4
 # It's suggested that names without spaces be used when running
 # in HTML output mode.
 #
-cidd.level1_label:              LVB 
-cidd.level1_min_xkm:            -550.0
-cidd.level1_min_ykm:            -300.0
-cidd.level1_max_xkm:            550.0
-cidd.level1_max_ykm:            500.0
+#
+cidd.level1_label:              1000km
+cidd.level1_min_xkm:            -1000.0
+cidd.level1_min_ykm:            -1000.0
+cidd.level1_max_xkm:            1000.0
+cidd.level1_max_ykm:            1000.0
 #
 cidd.level2_label:              500km
 cidd.level2_min_xkm:            -500.0
@@ -749,8 +750,12 @@ cidd.max_adeg:               360.0
 
 # List of comma delimited local directories or HTTP URLs to search
 # Search . then each directory/URL in order 
-cidd.color_file_subdir:   ../color_scales,http://front.eol.ucar.edu/color_scales
-cidd.map_file_subdir:     ../color_scales,http://front.eol.ucar.edu/maps
+#cidd.color_file_subdir:   /cidd/projDir/displayHome/color_scales,http://front.eol.ucar.edu/color_scales
+#cidd.map_file_subdir:     /cidd/projDir/displayHome/maps,http://front.eol.ucar.edu/maps
+#cidd.color_file_subdir:   http://front.eol.ucar.edu/color_scales
+#cidd.map_file_subdir:     http://front.eol.ucar.edu/maps
+cidd.color_file_subdir:   ../color_scales
+cidd.map_file_subdir:     ../maps
 
 #
 # Station locator features

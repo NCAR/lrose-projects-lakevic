@@ -1,0 +1,82 @@
+#! /bin/csh -f
+
+cd /cidd/data
+
+mkdir -p cfradial/mwanza
+
+rsync -av /media/lakevic/data/cfradial/mwanza/20171218 cfradial/mwanza
+rsync -av /media/lakevic/data/cfradial/mwanza/20171219 cfradial/mwanza
+rsync -av /media/lakevic/data/cfradial/mwanza/20171220 cfradial/mwanza
+
+rsync -av /media/lakevic/data/cfradial/mwanza/20190114 cfradial/mwanza
+rsync -av /media/lakevic/data/cfradial/mwanza/20190115 cfradial/mwanza
+rsync -av /media/lakevic/data/cfradial/mwanza/20190116 cfradial/mwanza
+
+rsync -av /media/lakevic/data/cfradial/mwanza/20190306 cfradial/mwanza
+rsync -av /media/lakevic/data/cfradial/mwanza/20190307 cfradial/mwanza
+rsync -av /media/lakevic/data/cfradial/mwanza/20190308 cfradial/mwanza
+rsync -av /media/lakevic/data/cfradial/mwanza/20190309 cfradial/mwanza
+
+rsync -av /media/lakevic/data/cfradial/mwanza/20190330 cfradial/mwanza
+rsync -av /media/lakevic/data/cfradial/mwanza/20190331 cfradial/mwanza
+rsync -av /media/lakevic/data/cfradial/mwanza/20190401 cfradial/mwanza
+
+rsync -av /media/lakevic/data/cfradial/mwanza/20190425 cfradial/mwanza
+rsync -av /media/lakevic/data/cfradial/mwanza/20190426 cfradial/mwanza
+rsync -av /media/lakevic/data/cfradial/mwanza/20190427 cfradial/mwanza
+
+mkdir -p spdb/surface
+rsync -av /media/lakevic/data/spdb/surface/* spdb/surface
+
+mkdir -p spdb/ltg
+
+rsync -av /media/lakevic/data/spdb/ltg/20171218* spdb/ltg
+rsync -av /media/lakevic/data/spdb/ltg/20171219* spdb/ltg
+rsync -av /media/lakevic/data/spdb/ltg/20171220* spdb/ltg
+
+rsync -av /media/lakevic/data/spdb/ltg/20190114* spdb/ltg
+rsync -av /media/lakevic/data/spdb/ltg/20190115* spdb/ltg
+rsync -av /media/lakevic/data/spdb/ltg/20190116* spdb/ltg
+
+rsync -av /media/lakevic/data/spdb/ltg/20190306* spdb/ltg
+rsync -av /media/lakevic/data/spdb/ltg/20190307* spdb/ltg
+rsync -av /media/lakevic/data/spdb/ltg/20190308* spdb/ltg
+rsync -av /media/lakevic/data/spdb/ltg/20190309* spdb/ltg
+
+rsync -av /media/lakevic/data/spdb/ltg/20190330* spdb/ltg
+rsync -av /media/lakevic/data/spdb/ltg/20190331* spdb/ltg
+rsync -av /media/lakevic/data/spdb/ltg/20190401* spdb/ltg
+
+rsync -av /media/lakevic/data/spdb/ltg/20190425* spdb/ltg
+rsync -av /media/lakevic/data/spdb/ltg/20190426* spdb/ltg
+rsync -av /media/lakevic/data/spdb/ltg/20190427* spdb/ltg
+
+mkdir -p mdv/model
+mkdir -p mdv/satellite
+mkdir -p mdv/terrain
+
+rsync -av /media/lakevic/data/mdv/model/* mdv/model
+rsync -av /media/lakevic/data/mdv/terrain/* mdv/terrain
+
+rsync -av /media/lakevic/data/mdv/satellite/20171218 mdv/satellite
+rsync -av /media/lakevic/data/mdv/satellite/20171219 mdv/satellite
+rsync -av /media/lakevic/data/mdv/satellite/20171220 mdv/satellite
+
+rsync -av /media/lakevic/data/mdv/satellite/20190114 mdv/satellite
+rsync -av /media/lakevic/data/mdv/satellite/20190115 mdv/satellite
+rsync -av /media/lakevic/data/mdv/satellite/20190116 mdv/satellite
+
+rsync -av /media/lakevic/data/mdv/satellite/20190306 mdv/satellite
+rsync -av /media/lakevic/data/mdv/satellite/20190307 mdv/satellite
+rsync -av /media/lakevic/data/mdv/satellite/20190308 mdv/satellite
+rsync -av /media/lakevic/data/mdv/satellite/20190309 mdv/satellite
+
+rsync -av /media/lakevic/data/mdv/satellite/20190330 mdv/satellite
+rsync -av /media/lakevic/data/mdv/satellite/20190331 mdv/satellite
+rsync -av /media/lakevic/data/mdv/satellite/20190401 mdv/satellite
+
+rsync -av /media/lakevic/data/mdv/satellite/20190425 mdv/satellite
+rsync -av /media/lakevic/data/mdv/satellite/20190426 mdv/satellite
+rsync -av /media/lakevic/data/mdv/satellite/20190427 mdv/satellite
+
+
