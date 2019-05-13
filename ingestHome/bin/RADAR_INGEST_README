@@ -1,0 +1,20 @@
+(a) Unload the data from the USB drive.
+
+The files will be something like:
+
+- 9355MWA-20171206-085130-PPIVol.nc
+
+(b) rsync them to lakevic as user nowcast:
+
+- rsync -av *files* lakevic.rap.ucar.edu:/home/nowcast/data/lakevic/raw/mwanza
+
+(c) Convert them:
+
+- log in to lakevic as nowcast
+
+- cd /home/nowcast/data/lakevic/raw/mwanza/<YYYYMMDD>
+
+- RadxConvert -debug -f *.nc -outdir /home/nowcast/data/lakevic/cfradial/mwanza
+
+NOTE: some of the files can be corrupt which will cause RadxConvert to
+return an error for that file.

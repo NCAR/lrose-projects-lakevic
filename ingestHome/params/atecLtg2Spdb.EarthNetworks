@@ -1,0 +1,311 @@
+/**********************************************************************
+ * TDRP params for atecLtg2Spdb
+ **********************************************************************/
+
+//======================================================================
+//
+// atecLtg2Spdb reads LTG records from ASCII files, converts them to 
+//   LTG_strike_t format (rapformats library) and stores them in SPDB.
+//
+//======================================================================
+ 
+//======================================================================
+//
+// DEBUGGING AND PROCESS CONTROL.
+//
+//======================================================================
+ 
+///////////// debug ///////////////////////////////////
+//
+// Debug option.
+// If set, debug messages will be printed with the appropriate level of 
+//   detail.
+//
+// Type: enum
+// Options:
+//     DEBUG_OFF
+//     DEBUG_NORM
+//     DEBUG_VERBOSE
+//
+
+debug = DEBUG_NORM;
+
+///////////// instance ////////////////////////////////
+//
+// Process instance.
+// Used for registration with procmap.
+// Type: string
+//
+
+instance = "EarthNetworks";
+
+//======================================================================
+//
+// PROGRAM MODES OF OPERATION.
+//
+//======================================================================
+ 
+///////////// mode ////////////////////////////////////
+//
+// Operating mode.
+// In REALTIME mode, the program waits for a new input file. In this 
+//   mode it is optional to watch for a latest_data_info file. In ARCHIVE 
+//   mode, it processes all of the data files in the input directory 
+//   between the start and end times set on the command line. In FILELIST 
+//   mode, it processes all of the files in the list specified on the 
+//   command line. In FILELIST mode paths must be fully qualified with 
+//   respect to the date and time - so if each date has a separate 
+//   subdirectory the date part of the path must be included.
+//
+// Type: enum
+// Options:
+//     ARCHIVE
+//     REALTIME
+//     FILELIST
+//
+
+mode = REALTIME;
+
+//======================================================================
+//
+// DATA INPUT.
+//
+//======================================================================
+ 
+///////////// input_dir ///////////////////////////////
+//
+// Input directory.
+// Directory where input data files can be found.
+// Type: string
+//
+
+input_dir = "$(RAP_DATA_DIR)/$(PROJECT)/raw/EarthNetworks/lightning";
+
+///////////// latest_data_info_avail //////////////////
+//
+// Set to true if there is a latest_data_info file available in the 
+//   input directory.
+// REALTIME mode only.
+// Type: boolean
+//
+
+latest_data_info_avail = FALSE;
+
+///////////// max_realtime_valid_age //////////////////
+//
+// Max valid age of rdata input files in realtime mode (secs).
+// This the max valid age for an incoming file. The program will wait 
+//   for a data file more recent than this age.
+// Minimum val: 1
+// Type: int
+//
+
+max_realtime_valid_age = 3600;
+
+///////////// strict_subdir_check /////////////////////
+//
+// When set, only checks input_dir for subdirs of the form YYYYMMDD.
+// Only in REALTIME mode with latest_data_info_avail FALSE.
+// Type: boolean
+//
+
+strict_subdir_check = TRUE;
+
+///////////// file_name_check /////////////////////////
+//
+// When set, check that input file names contain specified substring.
+// See file_match_string parameter for substring specification.
+// Type: boolean
+//
+
+file_name_check = FALSE;
+
+///////////// file_match_string ///////////////////////
+//
+// If file_name_check (above) is TRUE, then
+// input filenames must contain this string.
+// If file_name_check is TRUE then input file names
+// must contain this string to be processed.
+// Type: string
+//
+
+file_match_string = "dat";
+
+///////////// checkBoundingBox ////////////////////////
+//
+// Set to TRUE to check that LTG strike is within a bounding box.
+// Type: boolean
+//
+
+checkBoundingBox = FALSE;
+
+///////////// boundingBox /////////////////////////////
+//
+// Bounding box to check if checkBoundingBox is TRUE.
+// Only data which falls inside this box will be stored.
+//
+// Type: struct
+//   typedef struct {
+//      double min_lat;
+//      double max_lat;
+//      double min_lon;
+//      double max_lon;
+//   }
+//
+//
+
+boundingBox = {
+    min_lat = -90,
+    max_lat = 90,
+    min_lon = -180,
+    max_lon = 180
+};
+
+//======================================================================
+//
+// DATA OUTPUT.
+//
+//======================================================================
+ 
+///////////// output_url //////////////////////////////
+//
+// Output URL for decoded metars.
+// Example of full URL: spdbp:://localhost::spdb/ltg. If the dir does 
+//   not start with . or / it is stored relative to $RAP_DATA_DIR.
+// Type: string
+//
+
+output_url = "spdbp:://localhost::$(PROJECT)/spdb/ltg/EarthNetworks";
+
+///////////// expire_seconds //////////////////////////
+//
+// Expire time in seconds for each strike.
+// Type: int
+//
+
+expire_seconds = 60;
+
+///////////// delay_after_write ///////////////////////
+//
+// Sleep time after writing, millisecs.
+// Use to prevent data distribution problems.
+// Type: int
+//
+
+delay_after_write = 0;
+
+///////////// delay_before_processing /////////////////
+//
+// Sleep time before processing file, secs.
+// Use to prevent data being processed prematurely.
+// Type: int
+//
+
+delay_before_processing = 0;
+
+///////////// duplicates //////////////////////////////
+//
+// Option to filter out near duplicate types and
+// parameters to do so.
+// Set check to TRUE to perform this check. It is
+// assumed that the strikes come in in temporal order. If
+// a strike is spatially within maxDist (Km), and temporally
+// within maxTime (seconds) of the last strike then the strike
+// will be seen as a near duplicate and will be rejected.
+//
+// Type: struct
+//   typedef struct {
+//      boolean check;
+//      double maxDist;
+//      int maxTime;
+//   }
+//
+//
+
+duplicates = {
+    check = FALSE,
+    maxDist = 1,
+    maxTime = 1
+};
+
+///////////// dup_check_cg_only ///////////////////////
+//
+// Option to apply duplicates check to cg strikes only, not cc.
+// May be useful.
+// Type: boolean
+//
+
+dup_check_cg_only = FALSE;
+
+///////////// max_dup_stroke_count ////////////////////
+//
+// Maximum number of consectutive strokes that can be
+// discarded as duplicates.
+// May be useful in emulating NLDN data.
+// Type: int
+//
+
+max_dup_stroke_count = 15;
+
+///////////// saveInd /////////////////////////////////
+//
+// Option to additionally save data to different URLs depending
+// on the strike polarity and type (CG vs. CC).
+// May be useful to do this.
+//
+// Type: struct
+//   typedef struct {
+//      boolean saveIndividualTypes;
+//      string cloudCloudPositiveUrl;
+//      string cloudCloudNegativeUrl;
+//      string cloudGroundPositiveUrl;
+//      string cloudGroundNegativeUrl;
+//   }
+//
+//
+
+saveInd = {
+    saveIndividualTypes = FALSE,
+    cloudCloudPositiveUrl = "spdbp:://localhost::$(PROJECT)/spdb/ltg/Wxbug_CCP",
+    cloudCloudNegativeUrl = "spdbp:://localhost::$(PROJECT)/spdb/ltg/Wxbug_CCN",
+    cloudGroundPositiveUrl = "spdbp:://localhost::$(PROJECT)/spdb/ltg/Wxbug_CGP",
+    cloudGroundNegativeUrl = "spdbp:://localhost::$(PROJECT)/spdb/ltg/Wxbug_CGN"
+};
+
+///////////// format //////////////////////////////////
+//
+// Input format option.
+// Defines input format. If FORMAT_ONE is used then
+// each line of the ascii input files has the comma
+// separated entries :
+// unix_time - as a double (with fractions of seconds)
+// lat and lon, decimcal degrees
+// amplitude
+// A dummy integer (don't ask) and
+// An integer flag, 0=cloud-ground, else in-cloud.
+
+// For FORMAT_TWO the entries are not comma separated.
+// They are :
+// Time YYYY-MM-DD hh:mm:ss
+// Millliseconds
+// lat and lon, decimal degrees
+// Amplitude times 1000, and 
+// A two character flag, IC == in-cloud, CG==cloud-ground
+
+// For FORMAT_THREE the entries are not comma separated.
+// They are :
+// unix_time - as a double (with fractions of seconds)
+// Millliseconds
+// lat and lon, decimal degrees
+// Amplitude, and 
+// An interger flag, 0=cloud-ground, else in-cloud.
+//
+// Type: enum
+// Options:
+//     FORMAT_ONE
+//     FORMAT_TWO
+//     FORMAT_THREE
+//
+
+format = FORMAT_THREE;
+

@@ -1,0 +1,80 @@
+#
+# INGEST_HOST
+#
+#-----------------------------
+# Get wbug lightning data
+#
+*/1 * * * * flock -n /tmp/rsync_WxBug_data.nc.lock -c "rsync_WxBug_data.py --input nowcast@moxie:/d1/nowcast/fieldData/wbug_lightning --output $RAP_DATA_DIR/$PROJECT/raw/EarthNetworks/lightning >& /dev/null"
+#-----------------------------
+#
+#
+#-----------------------------
+# Get surface and upperair data
+#
+*/5 * * * * flock -n /tmp/rsync_eol_sfc_data.lock -c "rsync -au hardt@rain.eol.ucar.edu:/net/work/Projects/HIGHWAY/data_ingest/surface $RAP_DATA_DIR/$PROJECT/raw >& /dev/null"
+*/5 * * * * flock -n /tmp/rsync_eol_upperair_data.lock -c "rsync -au hardt@rain.eol.ucar.edu:/net/work/Projects/HIGHWAY/data_ingest/upperair $RAP_DATA_DIR/$PROJECT/raw >& /dev/null"
+#-----------------------------
+#
+#
+#-----------------------------
+# Get model data
+#
+*/5 * * * * flock -n /tmp/rsync_eol_model_data.lock -c "rsync -au hardt@rain.eol.ucar.edu:/net/work/Projects/HIGHWAY/data_ingest/model $RAP_DATA_DIR/$PROJECT/raw >& /dev/null"
+#-----------------------------
+#
+#
+#-----------------------------
+# Get 3D-Paws data
+#
+*/5 * * * * flock -n /tmp/rsync_3d-paws_data.lock -c "rsync -au /var/autofs/mnt/eyewall_d1/pkucera/weather_stations/Kenya_* $RAP_DATA_DIR/$PROJECT/raw/surface/3dPaws >& /dev/null"
+*/5 * * * * flock -n /tmp/rsync_3d-paws_WMO_data.lock -c "rsync -au /var/autofs/mnt/eyewall_d1/pkucera/weather_stations/WMO_* $RAP_DATA_DIR/$PROJECT/raw/surface/3dPaws >& /dev/null"
+#-----------------------------
+#
+#
+#-----------------------------
+# Ingest 3D-Paws surface data from 4 hours back to current
+#
+*/15 * * * * flock -n /tmp/ingest_3dPaws_data.lock -c "run_reformat_3dPaws.bash >& $LOG_DIR/run_reformat_3dPaws-rt.log"
+#-----------------------------
+#
+#
+#-----------------------------
+# Ingest 3D-Paws surface data from 2 days back to 1 day back in case new files come in.
+#
+0 17 * * * flock -n /tmp/ingest_3dPaws_data_day.lock -c "run_reformat_3dPaws_back_2_days.bash >& $LOG_DIR/run_reformat_3dPaws-back_2_days.log"
+#-----------------------------
+#
+#
+#-----------------------------
+# Ingest TAHMO surface data from 4 hours back to current time
+#
+*/15 * * * * flock -n /tmp/ingest_TAHMO_data.lock -c "run_TAHMO_reformat.bash >& $LOG_DIR/run_TAHMO_reformat-rt.log"
+#-----------------------------
+#
+#
+#-----------------------------
+# Ingest TAHMO surface data between 25 hours back to 24 hours back
+#
+10 * * * * flock -n /tmp/ingest_TAHMO_data-back_a_day.lock -c "run_TAHMO_reformat-back_1_day.bash >& $LOG_DIR/run_TAHMO_reformat-back_1_day.log"
+#-----------------------------
+#
+#
+#-----------------------------
+# Ingest TAHMO surface data 1 week back (169 hour back to 168 hours back)
+#
+0 * * * * flock -n /tmp/ingest_TAHMO_data-back_a_week.lock -c "run_TAHMO_reformat-back_1_week.bash >& $LOG_DIR/run_TAHMO_reformat-back_1_week.log"
+#-----------------------------
+#
+#
+#-----------------------------
+# Ingest AWS metar surface data from 4 hours back to current time
+#
+*/15 * * * * flock -n /tmp/ingest_Metart_AWS.lock -c "run_Metar2Spdb-AWS.bash >& $LOG_DIR/run_Metar2Spdb-AWS.log"
+#-----------------------------
+#
+#
+#-----------------------------
+# create surface data images from 2 days back (49 hours back to 48 hours back)
+#
+0 * * * * flock -n /tmp/sfcImages2DaysBack.lock -c "run_archive_image_dump-sfc_2_days_back.bash >& $LOG_DIR/run_archive_image_dump-sfc_2_days_back.log"
+#-----------------------------

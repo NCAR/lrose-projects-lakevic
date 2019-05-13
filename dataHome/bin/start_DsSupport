@@ -1,0 +1,56 @@
+#! /bin/csh -f
+
+cd $RAP_DATA_DIR
+
+#
+# The default instance for the DsServerMgr is primary
+#
+running "DsServerMgr"
+if ($status == 1) then
+    echo "DsServerMgr"
+#    DsServerMgr -verbose |& LogFilter -d $LOG_DIR -p DsServerMgr  -i primary  &
+    DsServerMgr |& LogFilter -d $LOG_DIR -p DsServerMgr  -i primary  &
+endif
+
+#
+# use this script to make sure servers are running for Jazz
+# currently Jazz appears to not contact the DsServerMgr
+# When these servers are kick off from the DsServerMgr
+# the instance is manager
+#
+running "DsMdvServer -instance manager"
+if ($status == 1) then
+    echo "DsMdvServer -instance manager"
+    DsMdvServer -instance manager  |& LogFilter -d $LOG_DIR -p DsMdvServer  -i manager  &
+endif
+
+running "Metar2Symprod -instance manager"
+if ($status == 1) then
+    echo "Metar2Symprod -instance manager"
+    Metar2Symprod -instance manager  |& LogFilter -d $LOG_DIR -p Metar2Symprod  -i manager  &
+endif
+
+running "Tstorms2Symprod -instance manager"
+if ($status == 1) then
+    echo "Tstorms2Symprod -instance manager"
+    Tstorms2Symprod -instance manager  |& LogFilter -d $LOG_DIR -p Tstorms2Symprod  -i manager  &
+endif
+    
+running "Bdry2Symprod -instance manager"
+if ($status == 1) then
+    echo "Bdry2Symprod -instance manager"
+    Bdry2Symprod -instance manager  |& LogFilter -d $LOG_DIR -p Bdry2Symprod  -i manager  &
+endif
+    
+running "GenPoly2Symprod -instance manager"
+if ($status == 1) then
+    echo "GenPoly2Symprod -instance manager"
+    GenPoly2Symprod -instance manager  |& LogFilter -d $LOG_DIR -p GenPoly2Symprod  -i manager  &
+endif
+
+running "NcMdvServer -instance manager"
+if ($status == 1) then
+    echo "NcMdvServer -instance manager"
+#    NcMdvServer -instance manager -verbose |& LogFilter -d $LOG_DIR -p NcMdvServer  -i manager  &
+    NcMdvServer -instance manager |& LogFilter -d $LOG_DIR -p NcMdvServer  -i manager  &
+endif

@@ -1,0 +1,59 @@
+#!/usr/bin/perl
+#
+# Perl script to be driven by LdataWatcher that takes the args
+# given to it on the command line and uses them to run CIDD
+# to dump image - since the data are WRF forecast data, we
+# need this script to add the gen and lead times to get
+# the valid time. Niles Oien Dec 2010.
+#
+$numArgs = $#ARGV + 1;
+print "Running with $numArgs command-line arguments:\n";
+
+foreach $argnum (0 .. $#ARGV) {
+   print "$ARGV[$argnum]\n";
+}
+
+print "Latest data info :\n";
+$com = "cat \$RAP_DATA_DIR/\$PROJECT/mdv/satellite/meteosat-11/_latest_data_info";
+system( $com );
+
+$unixTime = $ARGV[0];
+$leadTime = $ARGV[11];
+
+$actualUnixTime = $unixTime + $leadTime;
+
+# 
+# Reformat the time string.
+#
+($sec,$min,$hour,$mday,$mon,$year,$wday,$yday,$isdst) = gmtime( $actualUnixTime );
+$year += 1900;
+$mon=$mon+1;
+
+$mon=sprintf("%02d", $mon);
+$mday=sprintf("%02d", $mday);
+$hour=sprintf("%02d", $hour);
+$min=sprintf("%02d", $min);
+$sec=sprintf("%02d", $sec);
+
+print "Time is $year $mon $mday $hour $min $sec\n";
+
+#
+# Run CIDD. Make sure Xvfb is running first. The start
+# script for LdataWatcher should have "setenv DISPLAY :99"
+# so CIDD should be looking at the right buffer.
+#
+$cmd = "start_Xvfb.99";
+system( $cmd );
+#
+$com = "CIDD -p CIDD.satIrLtg5minImgDump -t " . $year . $mon . $mday . $hour . $min . $sec; 
+print "Executing $com\n";
+system($com);
+
+$com = "CIDD -p CIDD.satIrLtg15minImgDump -t " . $year . $mon . $mday . $hour . $min . $sec; 
+print "Executing $com\n";
+system($com);
+
+$com = "CIDD -p CIDD.surfaceDataImgDump -t " . $year . $mon . $mday . $hour . $min . $sec; 
+print "Executing $com\n";
+system($com);
+

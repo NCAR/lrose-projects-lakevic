@@ -1,0 +1,49 @@
+#!/bin/csh -f
+
+set WORK_DIR=$cwd
+source ANC_SOURCE_CODE
+
+cd $ANC_DIR 
+
+setenv HOST_OS LINUX_64
+setenv RAP_MAKE_INC_DIR      $ANC_DIR/make_include
+setenv RAP_MAKE_BIN_DIR      $ANC_DIR/make_bin
+setenv RAP_INC_DIR           $ANC_DIR/include
+setenv RAP_LIB_DIR           $ANC_DIR/lib
+setenv RAP_BIN_DIR           $ANC_DIR/bin
+setenv RAP_MAN_DIR           $ANC_DIR/man
+setenv RAP_DOC_DIR           $ANC_DIR/doc
+setenv RAP_SHARED_INC_DIR    $ANC_DIR/include
+setenv RAP_SHARED_LIB_DIR    $ANC_DIR/lib
+setenv RAP_SHARED_BIN_DIR    $ANC_DIR/bin
+
+if( -e $ANC_DIR/incs ) then
+    cd $ANC_DIR/incs
+    make clean_all
+endif
+
+if( -e $ANC_DIR/libs/tdrp ) then
+    cd $ANC_DIR/libs/tdrp
+    make clean_all
+endif
+
+if( -e $ANC_DIR/apps/tdrp/src/tdrp_gen ) then
+    cd $ANC_DIR/apps/tdrp/src/tdrp_gen
+    make clean_all
+endif
+
+foreach lib ($libs)
+    if( -e $ANC_DIR/libs/$lib ) then
+	cd $ANC_DIR/libs/$lib
+	make clean_all
+    endif
+end
+
+foreach dir ($apps_dir_list)
+    foreach app ($dir)
+	if( -e $ANC_DIR/apps/$app ) then
+	    cd $ANC_DIR/apps/$app
+	    make clean_all
+	endif
+    end
+end

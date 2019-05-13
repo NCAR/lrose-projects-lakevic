@@ -1,0 +1,10 @@
+#!/bin/csh -f
+
+cd $INGEST_HOME/params
+
+running "McidasNcf2Mdv -params McidasNcf2Mdv.ch6"
+if ($status == 1) then
+  echo "McidasNcf2Mdv -params McidasNcf2Mdv.ch6"
+  McidasNcf2Mdv -params McidasNcf2Mdv.ch6 |& LogFilter -d $LOG_DIR -p McidasNcf2Mdv -i ch6 &
+endif
+#

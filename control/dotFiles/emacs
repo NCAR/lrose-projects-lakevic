@@ -1,0 +1,197 @@
+;;;; backup
+(setq backup-directory-alist '(("." . "/home/nowcast/.emacs_backup"))
+ backup-by-copying      t
+ version-control        t
+ delete-old-versions    t
+ kept-new-versions      6
+ kept-old-versions      2
+)
+
+;;;; foreground & backupgroud color
+;(setq default-frame-alist
+;     (append default-frame-alist
+;      '((foreground-color . "MediumOrchid1")
+;(background-color . "black")
+;(cursor-color . "sky blue")
+;)))
+
+;;;; support for screen-256color
+;; http://emacsbugs.donarmstrong.com/cgi-bin/bugreport.cgi?bug=2650
+(load "term/xterm")
+(defun terminal-init-screen ()
+    "Terminal initialization function for screen."
+    ;; Use the xterm color initialization code.
+    (xterm-register-default-colors)
+    (tty-set-up-initial-frame-faces))
+
+;; ibuffer
+(global-set-key (kbd "C-x C-b") 'ibuffer)
+;;=============================================================
+(setq visible-bell t)
+(setq auto-save-interval 500)
+(setq require-final-newline t)
+(setq-default fill-column 75)
+
+(setq defbackground "black")
+(setq defforeground "grey80")
+(set-face-background 'default defbackground)
+(set-face-foreground 'default defforeground)
+;;(set-default-font "fixed")
+(set-cursor-color "sky blue")
+(set-mouse-color "dark orange")
+
+(global-set-key [f1]   'undo)
+(global-set-key [f2]   'goto-line)
+(global-set-key [f3]   'query-replace)
+(global-set-key [f4]   'replace-string)
+(global-set-key [f5]   'shell)
+(global-set-key [f6]   'compile)
+(global-set-key [f7]   'comment-region)
+(global-set-key [f8]   'uncomment-region) 
+
+;
+; Use hilit19 to do highlighting
+;
+(cond (window-system
+       (setq hilit-quietly t)
+       (require 'hilit19)
+       ;
+       ; Choose colors that aren't quite so overwhelming
+       ;
+       (hilit-translate comment 'cyan
+			include 'coral
+			define	'Thistle
+			defun	'yellow
+			decl	'pink
+			string	'khaki
+			keyword	'PaleGreen)
+       ;
+       ; Allow "# ifdef notdef ... # endif" to be treated as a big comment
+       ; in C and C++ modes.  Also handle C++ "//"-style comments.
+       ;
+       (hilit-add-pattern "^# *ifdef notdef" "^# *endif" 'comment 'c-mode)
+       (hilit-add-pattern "^# *ifdef notdef" "^# *endif" 'comment 'c++-mode)
+       (hilit-add-pattern "^# *if 0" "^# *endif" 'comment 'c-mode)
+       (hilit-add-pattern "^# *if 0" "^# *endif" 'comment 'c++-mode)
+       (hilit-add-pattern "^class" "[^{;]*" 'defun 'c++-mode)
+       (hilit-add-pattern "public:" "public:" 'defun 'c++-mode)
+       (hilit-add-pattern "private:" "private:" 'defun 'c++-mode)
+       (hilit-add-pattern "\/\/" "$" 'comment 'c-mode) ) )
+
+;
+; new C mode stuff
+;
+(add-hook 'c-mode-common-hook 'c-common-setup)
+(defun c-common-setup () "My common initialization for C and C++ modes"
+  (c-toggle-auto-state 1)
+  (setq c-basic-offset 2)
+  (setq c-tab-always-indent nil)
+
+  (setq my-c-offsets-alist 
+	'((substatement-open . 0)
+	  (comment-intro . 0)
+	  (case-label . 0)
+	  (statement-case-open . 0)
+	  (knr-argdecl-intro . 0)
+	  (statement-case-intro . 0)))
+  (setq c-offsets-alist (append my-c-offsets-alist c-offsets-alist))
+
+  (setq c-hanging-braces-alist 
+	'((brace-list-open)
+	  (brace-list-close)
+	  (defun-open before after)
+	  (defun-close before after)
+	  (class-open before after)
+	  (class-close before after)
+	  (block-open before after)
+	  (block-close before after))))
+
+;
+; old C mode stuff
+;
+(setq c-auto-newline 1)
+(setq c-tab-always-indent nil)
+(setq c-indent-level 2)
+(setq c-continued-statement-offset c-indent-level)
+(setq c-brace-offset (- c-indent-level))
+(setq c-brace-imaginary-offset 0)
+(setq c-argdecl-indent 0)
+(setq c-label-offset (- c-indent-level))
+
+;
+; Add to the list of file types for which a mode is automatically started
+;
+(setq auto-mode-alist
+  (append '(("\\.h$" . c++-mode))
+	  '(("\\.html$" . html-helper-mode)) 
+	  '(("\\.st$" . smalltalk-mode))
+	  auto-mode-alist))
+
+(autoload 'smalltalk-mode "/local/src/smalltalk/st.el" "" t)
+(autoload 'html-helper-mode 
+  "/local/lib/emacs/site-lisp/html-helper-mode.el" "" t)
+
+(setq load-path `("~/.emacs_modes" . ,load-path))
+(load-library "python-mode")
+(setq auto-mode-alist
+       (cons '("\\.py$" . python-mode) auto-mode-alist))
+
+(cond ((fboundp 'global-font-lock-mode)
+       ;; Customize face attributes
+       (setq font-lock-face-attributes
+             ;; Symbol-for-Face Foreground Background Bold Italic Underline
+             '((font-lock-comment-face       "cyan")
+               (font-lock-string-face        "light goldenrod")
+               (font-lock-keyword-face       "PaleGreen")
+               (font-lock-function-name-face "medium spring green")
+               (font-lock-variable-name-face "white")
+               (font-lock-type-face          "white")
+;               (font-lock-reference-face     "white")
+               ))
+       ;; Load the font-lock package.
+       (require 'font-lock)
+       ;; Maximum colors
+       (setq font-lock-maximum-decoration t)
+       ;; Turn on font-lock in all modes that support it
+       (global-font-lock-mode t)))
+
+;; This is more correct than the previous statement
+; (setq font-lock-face-attributes
+;       '(
+;         (font-lock-comment-face        "SteelBlue" nil nil 1 nil)
+;         (font-lock-string-face         "cyan" nil nil 1 nil)
+;         (font-lock-keyword-face        "darkorange"  nil nil nil nil)
+;         (font-lock-type-face           "yellow" nil nil nil nil)
+;         (font-lock-function-name-face  "DeepSkyBlue"  nil nil nil 1)
+;         (font-lock-variable-name-face  "magenta" nil nil nil nil)
+;         (font-lock-reference-face      "blue" nil nil nil nil)
+;         (font-lock-builtin-face        "lightblue" nil nil nil nil)
+;         (font-lock-constant-face       "cornflowerblue" nil nil nil nil)
+;         (font-lock-warning-face        "red" nil nil nil nil)))
+
+
+
+
+;;
+;
+; <Meta>-g == goto-line
+;
+(define-key global-map "\eg" 'goto-line)
+
+(put 'eval-expression 'disabled nil)
+
+(put 'downcase-region 'disabled nil)
+
+(put 'upcase-region 'disabled nil)
+(custom-set-variables
+  ;; custom-set-variables was added by Custom.
+  ;; If you edit it by hand, you could mess it up, so be careful.
+  ;; Your init file should contain only one such instance.
+  ;; If there is more than one, they won't work right.
+ '(inhibit-startup-screen t))
+(custom-set-faces
+  ;; custom-set-faces was added by Custom.
+  ;; If you edit it by hand, you could mess it up, so be careful.
+  ;; Your init file should contain only one such instance.
+  ;; If there is more than one, they won't work right.
+ )

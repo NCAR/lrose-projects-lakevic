@@ -1,0 +1,27 @@
+
+######################################################################################
+#
+# Contents: Every Host always
+#
+######################################################################################
+#
+# APPLICATION	INSTANCE	START_SCRIPT		KILL_SCRIPT	ACTION_HOST
+#
+# AAA           BBB             start_AAA.BBB           CCC             DDD
+#
+######################################################################################
+
+DataMapper	primary		start_DataMapper	snuff_inst	localhost
+
+# ----- Data Service -----
+
+DsServerMgr     primary         start_DsServerMgr    kill_DsServers  localhost
+
+# DsServerMgr     primary         start_DsSupport    kill_DsServers  localhost
+# DsMdvServer     primary         start_DsSupport    kill_DsServers  localhost
+# NcMdvServer     primary         start_DsSupport    kill_DsServers  localhost
+# Metar2Symprod   manager         start_DsSupport    kill_DsServers  localhost
+# Tstorms2Symprod manager         start_DsSupport    kill_DsServers  localhost
+# Bdry2Symprod    manager         start_DsSupport    kill_DsServers  localhost
+# GenPoly2Symprod manager         start_DsSupport    kill_DsServers  localhost
+

@@ -1,0 +1,764 @@
+/**********************************************************************
+ * TDRP params for McidasNcf2Mdv
+ **********************************************************************/
+
+//======================================================================
+//
+// Program name: McidasNcf2Mdv.
+//
+// McidasNcf2Mdv reads netCDF files containing satellite data written by 
+//   a McIdas system, and converts it into MDV format. It is assumed that 
+//   data from only a single band (field) exists in the file.
+//
+//======================================================================
+ 
+//======================================================================
+//
+// DEBUGGING AND PROCESS CONTROL.
+//
+//======================================================================
+ 
+///////////// debug ///////////////////////////////////
+//
+// Debug option.
+//
+// If set, debug messages will be printed appropriately.
+//
+//
+// Type: enum
+// Options:
+//     DEBUG_OFF
+//     DEBUG_NORM
+//     DEBUG_VERBOSE
+//     DEBUG_EXTRA
+//
+
+debug = DEBUG_EXTRA;
+
+///////////// instance ////////////////////////////////
+//
+// Process instance.
+//
+// Used for registration with procmap.
+//
+//
+// Type: string
+//
+
+instance = "ch6";
+
+///////////// reg_interval ////////////////////////////
+//
+// Registration interval.
+//
+// The number of seconds between expected procmap registrations.
+//
+//
+// Type: int
+//
+
+reg_interval = 60;
+
+//======================================================================
+//
+// DATA INPUT.
+//
+//======================================================================
+ 
+///////////// mode ////////////////////////////////////
+//
+// Operating mode.
+//
+// In REALTIME mode, the program waits for a new input file. In ARCHIVE 
+//   mode, it moves through the data between the start and end times set 
+//   on the command line. In FILELIST mode, it moves through the list of 
+//   file names specified on the command line. Paths (in FILELIST mode, at 
+//   least) MUST contain a day-directory below the data file -- 
+//   ./data_file.mdv will not work as a file path.
+//
+//
+// Type: enum
+// Options:
+//     ARCHIVE
+//     REALTIME
+//     FILELIST
+//
+
+mode = REALTIME;
+
+///////////// input_dir ///////////////////////////////
+//
+// Directory for input data.
+//
+// This is used in REALTIME and ARCHIVE modes only. In FILELIST mode, 
+//   the file paths are specified on the command line.
+//
+//
+// Type: string
+//
+
+input_dir = "$(RAP_DATA_DIR)/$(PROJECT)/raw/satellite/meteosat-11/netcdf";
+
+///////////// use_ldata_info_file /////////////////////
+//
+// Option to use _latest_data_info file as input trigger.
+//
+// REALTIME mode only. If true, waits on _latest_data_info file. If 
+//   false, scans the directory for new file.
+//
+//
+// Type: boolean
+//
+
+use_ldata_info_file = FALSE;
+
+///////////// max_realtime_age ////////////////////////
+//
+// Max valid age of rdata input files in realtime mode (secs).
+//
+// This the max valid age for an incoming file. The program will wait 
+//   for a data file more recent than this age.
+//
+// Minimum val: 1
+//
+// Type: int
+//
+
+max_realtime_age = 3600;
+
+///////////// process_latest_file_only ////////////////
+//
+// Option to use only the latest file to have arrived.
+//
+// REALTIME mode only. If true, will process only the latest file on 
+//   startup, if the file has an age less than max_realtime_age. If false, 
+//   on startup will process all files with age less than 
+//   max_realtime_age.
+//
+//
+// Type: boolean
+//
+
+process_latest_file_only = TRUE;
+
+///////////// file_name_ext ///////////////////////////
+//
+// Specify the extension of the files to be read.
+//
+// If blank, all extensions will be used.
+//
+//
+// Type: string
+//
+
+file_name_ext = "nc.gz";
+
+///////////// file_name_substr ////////////////////////
+//
+// Specify a seach string for the names of the files to be read.
+//
+// If blank, no check will be performed.
+//
+//
+// Type: string
+//
+
+file_name_substr = "06WV";
+
+//======================================================================
+//
+// NETCDF dimension and variable names.
+//
+// Specify the names used in the netCDF file for dimensions and 
+//   variables, since they can vary depending on the application used to 
+//   create the file.
+//
+//======================================================================
+ 
+///////////// netcdf_dim_n_lines //////////////////////
+//
+// name for netCDF dimension for number of lines.
+//
+//
+// Type: string
+//
+
+netcdf_dim_n_lines = "yc";
+
+///////////// netcdf_dim_n_elems //////////////////////
+//
+// name for netCDF dimension for number of elements (pixels across 
+//   image).
+//
+//
+// Type: string
+//
+
+netcdf_dim_n_elems = "xc";
+
+///////////// netcdf_dim_n_bands //////////////////////
+//
+// name for netCDF dimension for number of bands.
+//
+//
+// Type: string
+//
+
+netcdf_dim_n_bands = "bands";
+
+///////////// netcdf_var_image_date ///////////////////
+//
+// name for netCDF variable for image date.
+//
+//
+// Type: string
+//
+
+netcdf_var_image_date = "imageDate";
+
+///////////// netcdf_var_image_time ///////////////////
+//
+// name for netCDF variable for image time.
+//
+//
+// Type: string
+//
+
+netcdf_var_image_time = "imageTime";
+
+///////////// netcdf_var_time /////////////////////////
+//
+// name for netCDF variable for time.
+//
+//
+// Type: string
+//
+
+netcdf_var_time = "time";
+
+///////////// netcdf_var_line_res /////////////////////
+//
+// name for netCDF variable for line resolution.
+//
+//
+// Type: string
+//
+
+netcdf_var_line_res = "lineRes";
+
+///////////// netcdf_var_prefix_size //////////////////
+//
+// name for netCDF variable for line prefix size.
+//
+//
+// Type: string
+//
+
+netcdf_var_prefix_size = "prefixSize";
+
+///////////// netcdf_var_elem_res /////////////////////
+//
+// name for netCDF variable for element resolution.
+//
+//
+// Type: string
+//
+
+netcdf_var_elem_res = "elemRes";
+
+///////////// netcdf_var_image_data ///////////////////
+//
+// name for netCDF variable for image_data.
+//
+//
+// Type: string
+//
+
+netcdf_var_image_data = "data";
+
+///////////// netcdf_var_data_width ///////////////////
+//
+// name for netCDF variable for width of image data in bytes.
+//
+//
+// Type: string
+//
+
+netcdf_var_data_width = "dataWidth";
+
+///////////// netcdf_var_latitude /////////////////////
+//
+// name for netCDF variable for latitude.
+//
+//
+// Type: string
+//
+
+netcdf_var_latitude = "lat";
+
+///////////// netcdf_var_longitude ////////////////////
+//
+// name for netCDF variable for longitude.
+//
+//
+// Type: string
+//
+
+netcdf_var_longitude = "lon";
+
+///////////// netcdf_var_creation_date ////////////////
+//
+// name for netCDF variable for creation date.
+//
+//
+// Type: string
+//
+
+netcdf_var_creation_date = "crDate";
+
+///////////// netcdf_var_creation_time ////////////////
+//
+// name for netCDF variable for creation time.
+//
+//
+// Type: string
+//
+
+netcdf_var_creation_time = "crTime";
+
+///////////// netcdf_var_sensor_id ////////////////////
+//
+// name for netCDF variable for sensor ID.
+//
+//
+// Type: string
+//
+
+netcdf_var_sensor_id = "sensorID";
+
+///////////// netcdf_var_audit_trail //////////////////
+//
+// name for netCDF variable for audit trail, if available.
+//
+//
+// Type: string
+//
+
+netcdf_var_audit_trail = "auditTrail";
+
+//======================================================================
+//
+// DATASET TYPE.
+//
+//======================================================================
+ 
+///////////// datasets ////////////////////////////////
+//
+// Details applicable to each input dataset type.
+//
+// Each dataset contains a single field. We look for the name_sub_string 
+//   in the file name. If found, those details are applied to that 
+//   dataset. If a 0-length sub string is supplied, it will be used for 
+//   all files for which a valid sub string is not found. The data_scale 
+//   and data_offset are applied to the data dataset, to scale the data 
+//   appropriately and allow you to change units. If set to 1.0 and 0.0 
+//   respectively, no transformation will occur. The grid parameters are 
+//   also set individually for each data set.
+//
+//
+// Type: struct
+//   typedef struct {
+//      string file_name_sub_string;
+//      string field_name;
+//      string field_name_long;
+//      string units;
+//      double data_scale;
+//      double data_offset;
+//      int grid_nx;
+//      int grid_ny;
+//      double grid_minx;
+//      double grid_miny;
+//      double grid_dx;
+//      double grid_dy;
+//      string output_url;
+//   }
+//
+// 1D array - variable length.
+//
+
+datasets = {
+  {
+    file_name_sub_string = "06WV",
+    field_name = "7.3micron",
+    field_name_long = "WV lower",
+    units = "K",
+    data_scale = 1,
+    data_offset = 0,
+    grid_nx = 3000,
+    grid_ny = 3000,
+    grid_minx = 21.534252,
+    grid_miny = -13.352196,
+    grid_dx = 0.008983,
+    grid_dy = 0.008902,
+    output_url = "$(RAP_DATA_DIR)/$(PROJECT)/mdv/satellite/meteosat-11/7.3micron"
+  }
+};
+
+///////////// convert_counts_to_albedo ////////////////
+//
+// Option to compute albedo (%), given raw counts.
+//
+// If true, the albedo will be computed by scaling the counts into 
+//   albedo, and then correcting for sun angle.
+//
+//
+// Type: boolean
+//
+
+convert_counts_to_albedo = FALSE;
+
+///////////// counts_to_albedo_scale //////////////////
+//
+// Scale factor to apply to convert raw count values into albedo.
+//
+//
+// Type: double
+//
+
+counts_to_albedo_scale = 0.5;
+
+//======================================================================
+//
+// OUTPUT TIME STAMPING.
+//
+//======================================================================
+ 
+///////////// valid_time_offset ///////////////////////
+//
+// Offset added to image time to get valid time (secs).
+//
+// The McIdas images are time-stamed at the start of taking data for the 
+//   image. Generally, MDV files are time-stamped with the end time of the 
+//   data. So, this offset is added to the image time to give the valid 
+//   time of the data.
+//
+//
+// Type: int
+//
+
+valid_time_offset = 0;
+
+//======================================================================
+//
+// OUTPUT PROJECTION and GRID.
+//
+//======================================================================
+ 
+///////////// output_projection ///////////////////////
+//
+// Projection for remapping in x,y. See projection param below.
+//
+// 	PROJ_LATLON: simple lat/lon grid (Equidistant Cylindrical)
+// 	PROJ_FLAT: Azimuthal Equidistant (Radar)
+// 	PROJ_LAMBERT_CONF: Lambert Conformal Conic
+// 	PROJ_LAMBERT_AZIM: Lambert Azimuthal Equal Area
+// 	PROJ_MERCATOR: Mercator - EW orientation
+// 	PROJ_TRANS_MERCATOR: Tranverse Mercator - NS orientation
+// 	PROJ_POLAR_STEREO: Stereographic- polar aspect
+// 	PROJ_OBLIQUE_STEREO: Stereographic - oblique aspect
+// 	PROJ_ALBERS: Albers Equal Area Conic
+// 	PROJ_VERT_PERSP: Vertical Perspective (satellite view).
+//
+//
+// Type: enum
+// Options:
+//     PROJ_LATLON
+//     PROJ_LAMBERT_CONF
+//     PROJ_MERCATOR
+//     PROJ_POLAR_STEREO
+//     PROJ_FLAT
+//     PROJ_OBLIQUE_STEREO
+//     PROJ_TRANS_MERCATOR
+//     PROJ_ALBERS
+//     PROJ_LAMBERT_AZIM
+//     PROJ_VERT_PERSP
+//
+
+output_projection = PROJ_LATLON;
+
+///////////// preserve_input_geom_for_regular_latlon //
+//
+// Option to preserve the input grid details for regular lat/lon grids.
+//
+// If the output projection type is LATLON, and the input data is on a 
+//   regular latlon grid, the input grid is preserved, and the output grid 
+//   will match the input grid.
+//
+//
+// Type: boolean
+//
+
+preserve_input_geom_for_regular_latlon = FALSE;
+
+///////////// proj_rotation ///////////////////////////
+//
+// Projection grid rotation.
+//
+// This applies only to PROJ_FLAT projections.
+//
+//
+// Type: double
+//
+
+proj_rotation = 0;
+
+///////////// proj_origin_lat /////////////////////////
+//
+// Projection grid origin latitude.
+//
+// This applies to all projections except LATLON.
+//
+//
+// Type: double
+//
+
+proj_origin_lat = 0;
+
+///////////// proj_origin_lon /////////////////////////
+//
+// Projection grid origin longitude.
+//
+// This applies to all projections except LATLON.
+//
+//
+// Type: double
+//
+
+proj_origin_lon = 0;
+
+///////////// proj_lat1 ///////////////////////////////
+//
+// Projection grid reference latitude 1.
+//
+// This applies to LAMBERT_CONF and ALBERS projections.
+//
+//
+// Type: double
+//
+
+proj_lat1 = 0;
+
+///////////// proj_lat2 ///////////////////////////////
+//
+// Projection grid reference latitude 2.
+//
+// This applies to LAMBERT_CONF and ALBERS projections.
+//
+//
+// Type: double
+//
+
+proj_lat2 = 0;
+
+///////////// proj_central_scale //////////////////////
+//
+// Central scale for remapped projections.
+//
+// This applies to POLAR_STEREO and TRANSVERSE_MERCATOR projections.
+//
+//
+// Type: double
+//
+
+proj_central_scale = 1;
+
+///////////// proj_tangent_lat ////////////////////////
+//
+// Projection tangent latitude (deg).
+//
+// This applies to OBLIQUE_STEREO only.
+//
+//
+// Type: double
+//
+
+proj_tangent_lat = 0;
+
+///////////// proj_tangent_lon ////////////////////////
+//
+// Projection tangent longitude (deg).
+//
+// This applies to OBLIQUE_STEREO and POLAR_STEREO.
+//
+//
+// Type: double
+//
+
+proj_tangent_lon = 0;
+
+///////////// proj_pole_is_north //////////////////////
+//
+// Flag indicating stereogtraphic is over the NORTH pole.
+//
+// This applies to POLAR_STEREO. If false, the projection is over the 
+//   south pole.
+//
+//
+// Type: boolean
+//
+
+proj_pole_is_north = TRUE;
+
+///////////// proj_persp_radius ///////////////////////
+//
+// Radius of perspective point (km).
+//
+// This applies to VERT_PERSP.
+//
+//
+// Type: double
+//
+
+proj_persp_radius = 35786;
+
+//======================================================================
+//
+// OUTPUT ENCODING AND COMPRESSION.
+//
+//======================================================================
+ 
+///////////// output_encoding_type ////////////////////
+//
+// Set output encoding type.
+//
+//
+// Type: enum
+// Options:
+//     ENCODING_INT8
+//     ENCODING_INT16
+//     ENCODING_FLOAT32
+//
+
+output_encoding_type = ENCODING_FLOAT32;
+
+///////////// output_compression_type /////////////////
+//
+// Set output compression type.
+//
+// See <toolsa/compress> for details on the compression types.
+//
+//
+// Type: enum
+// Options:
+//     COMPRESSION_NONE
+//     COMPRESSION_RLE
+//     COMPRESSION_LZO
+//     COMPRESSION_ZLIB
+//     COMPRESSION_BZIP
+//     COMPRESSION_GZIP
+//     COMPRESSION_GZIP_VOL
+//
+
+output_compression_type = COMPRESSION_GZIP;
+
+///////////// data_set_name ///////////////////////////
+//
+// Name of data set.
+//
+// Appears in Mdv master header.
+//
+//
+// Type: string
+//
+
+data_set_name = "McIDAS";
+
+///////////// data_set_source /////////////////////////
+//
+// Source of data.
+//
+// Appears in Mdv master header.
+//
+//
+// Type: string
+//
+
+data_set_source = "EOL";
+
+//======================================================================
+//
+// WRITE ZEBRA NETCDF.
+//
+//======================================================================
+ 
+///////////// write_zebra_netcdf //////////////////////
+//
+// Option to write NetCDF files for use in Zebra.
+//
+// Zebra uses a specific NetCDF output format.
+//
+//
+// Type: boolean
+//
+
+write_zebra_netcdf = FALSE;
+
+///////////// zebra_netcdf_dir ////////////////////////
+//
+// Directory for Zebra NetCDF files.
+//
+//
+// Type: string
+//
+
+zebra_netcdf_dir = "/tmp/zebra/sat";
+
+///////////// zebra_write_to_day_dir //////////////////
+//
+// Option to create a day dir for Zebra data.
+//
+// A subdirectory named yyyymmdd will be created for the files.
+//
+//
+// Type: boolean
+//
+
+zebra_write_to_day_dir = TRUE;
+
+///////////// zebra_datasets //////////////////////////
+//
+// Zebra field name details.
+//
+// Zebra field data will be written in floats.
+//
+//
+// Type: struct
+//   typedef struct {
+//      string file_name_sub_string;
+//      string zebra_data_set_name;
+//      string zebra_field_name;
+//   }
+//
+// 1D array - variable length.
+//
+
+zebra_datasets = {
+  {
+    file_name_sub_string = "ch1",
+    zebra_data_set_name = "goes_1km",
+    zebra_field_name = "VIS"
+  }
+  ,
+  {
+    file_name_sub_string = "ch2",
+    zebra_data_set_name = "goes_4km",
+    zebra_field_name = "IR"
+  }
+  ,
+  {
+    file_name_sub_string = "ch4",
+    zebra_data_set_name = "goes_4km",
+    zebra_field_name = "WV"
+  }
+};
+

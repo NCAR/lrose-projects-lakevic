@@ -1,0 +1,30 @@
+MAILTO=hardt@rap.ucar.edu
+#
+# /bin/sh is the default
+# on many linux machines /bin/sh is a link to /bin/bash
+# Switching to use csh as default shell
+#
+SHELL=/bin/csh
+PATH=/etc:/bin:/sbin:/usr/bin:/usr/sbin
+#
+# In order to use enviornment variables in the .cshrc
+#
+*/5 * * * * . $HOME/.cshrc >& /dev/null
+#
+# Run the process control startup script every five minutes
+#   The script will restart procmap, servmap, and procmap_auto_restart
+#   only if they are not already running
+#
+#-----------------------------
+*/5 * * * * start_process.control >& $HOME/logs/process.control
+#-----------------------------
+
+#
+# Run a script to delete core files from DataMapper. Hopefully this can
+# be removed eventually. Longevity is a week.
+#
+#-----------------------------
+00 06 * * * flock  -n /tmp/RM_CORE.lock -c "find /home/nowcast/anc/projects/$PROJECT -follow -name core\* -exec \rm -f {} \; >& /dev/null" 
+#-----------------------------
+# 25 * * * * csh -c "find $PROJ_DIR -follow -name core\* -mtime +1 -exec \rm -f {} \; >& /dev/null" 
+# 55 * * * * csh -c "find $RAP_DATA_DIR -follow -name core\* -mtime +1 -exec \rm -f {} \; >& /dev/null" 

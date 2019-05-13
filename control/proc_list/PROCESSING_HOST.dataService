@@ -1,0 +1,61 @@
+
+######################################################################################
+#
+# Contents: Display Host
+#
+######################################################################################
+#
+# APPLICATION	INSTANCE	START_SCRIPT		KILL_SCRIPT	ACTION_HOST
+#
+# AAA           BBB             start_AAA.BBB           CCC             DDD
+#
+######################################################################################
+
+Janitor          netcdf_meteosat-11 start_Janitor.netcdf_meteosat-11      snuff_inst localhost
+
+atecLtg2Spdb     EarthNetworks      start_atecLtg2Spdb.EarthNetworks      snuff_inst localhost
+
+InputWatcher     ch1	    start_InputWatcher.ch1	  snuff_inst localhost
+InputWatcher     ch2	    start_InputWatcher.ch2	  snuff_inst localhost
+InputWatcher     ch3	    start_InputWatcher.ch3	  snuff_inst localhost
+InputWatcher     ch4	    start_InputWatcher.ch4	  snuff_inst localhost
+InputWatcher     ch5	    start_InputWatcher.ch5	  snuff_inst localhost
+InputWatcher     ch6	    start_InputWatcher.ch6	  snuff_inst localhost
+InputWatcher     ch7	    start_InputWatcher.ch7	  snuff_inst localhost
+InputWatcher     ch8	    start_InputWatcher.ch8	  snuff_inst localhost
+InputWatcher     ch9	    start_InputWatcher.ch9	  snuff_inst localhost
+InputWatcher     ch10	    start_InputWatcher.ch10	  snuff_inst localhost
+InputWatcher     ch11	    start_InputWatcher.ch11	  snuff_inst localhost
+InputWatcher     ch12	    start_InputWatcher.ch12	  snuff_inst localhost
+
+McidasNcf2Mdv    ch1        start_McidasNcf2Mdv.ch1       snuff_inst localhost
+McidasNcf2Mdv    ch2        start_McidasNcf2Mdv.ch2       snuff_inst localhost
+McidasNcf2Mdv    ch3        start_McidasNcf2Mdv.ch3       snuff_inst localhost
+McidasNcf2Mdv    ch4        start_McidasNcf2Mdv.ch4       snuff_inst localhost
+McidasNcf2Mdv    ch5        start_McidasNcf2Mdv.ch5       snuff_inst localhost
+McidasNcf2Mdv    ch6        start_McidasNcf2Mdv.ch6       snuff_inst localhost
+McidasNcf2Mdv    ch7        start_McidasNcf2Mdv.ch7       snuff_inst localhost
+McidasNcf2Mdv    ch8        start_McidasNcf2Mdv.ch8       snuff_inst localhost
+McidasNcf2Mdv    ch9        start_McidasNcf2Mdv.ch9       snuff_inst localhost
+McidasNcf2Mdv    ch10       start_McidasNcf2Mdv.ch10      snuff_inst localhost
+McidasNcf2Mdv    ch11       start_McidasNcf2Mdv.ch11      snuff_inst localhost
+McidasNcf2Mdv    ch12       start_McidasNcf2Mdv.ch12      snuff_inst localhost
+
+MdvCombine       meteosat-11 start_MdvCombine.meteosat-11 snuff_inst localhost
+
+######################################################################################
+Image Dumping for EOL catalog
+######################################################################################
+
+#
+# This instance of LdataWatcher will also process the satIrLtg15minImgDump
+# and the surfaceDataImgDump. These all use the same satellite data as the
+# trigger so included all 3 in the imageDumpDriver.satIrLtg5minImgDump
+#
+LdataWatcher   satIrLtg5minImgDump start_LdataWatcher.satIrLtg5minImgDump snuff_inst localhost
+
+InputWatcher   satIrLtg5minImgPush    start_InputWatcher.satIrLtg5minImgPush    snuff_inst localhost
+InputWatcher   satIrLtg15minImgPush   start_InputWatcher.satIrLtg15minImgPush   snuff_inst localhost
+InputWatcher   surfaceDataImgPush     start_InputWatcher.surfaceDataImgPush     snuff_inst localhost
+InputWatcher   surfaceDataImgPush     start_InputWatcher.surfaceDataImgPush     snuff_inst localhost
+InputWatcher   mwanzaRadarDataImgPush start_InputWatcher.mwanzaRadarDataImgPush snuff_inst localhost

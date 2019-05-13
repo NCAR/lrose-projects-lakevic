@@ -1,0 +1,10 @@
+#!/bin/csh -f
+
+cd $INGEST_HOME/params
+
+running "InputWatcher -params InputWatcher.ch2"
+if ($status == 1) then
+  echo "InputWatcher -params InputWatcher.ch2"
+  InputWatcher -params InputWatcher.ch2 |& LogFilter -d $LOG_DIR -p InputWatcher -i ch2 &
+endif
+#

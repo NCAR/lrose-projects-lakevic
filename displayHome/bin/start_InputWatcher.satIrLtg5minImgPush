@@ -1,0 +1,12 @@
+#! /bin/csh 
+
+cd $DISPLAY_HOME/params
+
+setenv DISPLAY :99
+
+running "InputWatcher -params InputWatcher.satIrLtg5minImgPush"
+if ($status == 1) then
+  echo "InputWatcher -params InputWatcher.satIrLtg5minImgPush"
+  InputWatcher -params InputWatcher.satIrLtg5minImgPush |& LogFilter -d $LOG_DIR -p InputWatcher -i satIrLtg5minImgPush >& /dev/null &
+endif
+

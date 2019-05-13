@@ -1,0 +1,117 @@
+#!/bin/csh -f
+
+set WORK_DIR=$cwd
+
+source ANC_SOURCE_CODE
+cd $ANC_DIR 
+
+set path = ( $path $ANC_DIR )
+setenv HOST_OS LINUX_CX11
+
+#
+# set up for the build.
+#
+setenv RAP_MAKE_INC_DIR      $ANC_DIR/make_include
+setenv RAP_MAKE_BIN_DIR      $ANC_DIR/make_bin
+setenv RAP_INC_DIR           $ANC_DIR/include
+setenv RAP_LIB_DIR           $ANC_DIR/lib
+setenv RAP_BIN_DIR           $ANC_DIR/bin
+setenv RAP_MAN_DIR           $ANC_DIR/man
+setenv RAP_DOC_DIR           $ANC_DIR/doc
+setenv RAP_SHARED_INC_DIR    $ANC_DIR/include
+setenv RAP_SHARED_LIB_DIR    $ANC_DIR/lib
+setenv RAP_SHARED_BIN_DIR    $ANC_DIR/bin
+#
+# Make directories then start build.
+#
+
+foreach dir ( $ANC_DIR $RAP_SHARED_BIN_DIR $RAP_SHARED_LIB_DIR $RAP_SHARED_INC_DIR)
+    if(! -e $dir ) then
+	echo mkdir -p $dir
+	mkdir -p $dir
+    endif
+end
+
+#
+# Start building.
+#
+# Make the inc dir to get os_config.h in place.
+#
+if( -e $ANC_DIR/incs) then
+    cd $ANC_DIR/incs
+    make install
+else
+    echo ERROR: $ANC_DIR/incs does not exist
+    exit 1
+endif
+
+#
+# Special case - build the tdrp lib and apps first, so
+# that tdrp_gen gets build - we need this to build all the apps, and
+# at least one of the other libs.
+#
+
+if( -e $ANC_DIR/libs/tdrp ) then
+    cd $ANC_DIR/libs/tdrp
+    make install
+else
+    echo ERROR: Missing $ANC_DIR/libs/tdrp.
+    exit 1
+endif
+
+if( -e $ANC_DIR/apps/tdrp/src/tdrp_gen ) then
+    cd $ANC_DIR/apps/tdrp/src/tdrp_gen
+    make install
+    rehash
+else
+    echo ERROR: Missing $ANC_DIR/apps/tdrp/src/tdrp_gen
+    exit 1
+endif
+
+#
+# Make the libraries.
+#
+foreach lib ($libs)
+    cd $ANC_DIR/libs
+    if( -e $lib ) then
+	cd $lib
+	make install_include
+    else
+	echo WARNING: $ANC_DIR/libs/$lib does note exist
+    endif
+end
+foreach lib ($libs)
+    cd $ANC_DIR/libs
+    if( -e $lib ) then
+	cd $lib
+	make opt install
+    else
+	echo WARNING: $ANC_DIR/libs/$lib does note exist
+    endif
+end
+
+#
+# Make the 64-bit apps
+#
+foreach app ($scripts)
+	if( -e $ANC_DIR/apps/$app ) then
+	    cp $ANC_DIR/apps/$app $ANC_DIR/bin/.
+	    rehash
+	else
+	    echo WARNING: $ANC_DIR/apps/$app does not exist
+	endif
+end
+
+foreach dir ($apps_dir_list)
+    foreach app ($dir)
+	if( -e $ANC_DIR/apps/$app ) then
+	    cd $ANC_DIR/apps/$app
+	    make -k opt install
+	    rehash
+	else
+	    echo WARNING: $ANC_DIR/apps/$app does not exist
+	endif
+    end
+end
+
+exit

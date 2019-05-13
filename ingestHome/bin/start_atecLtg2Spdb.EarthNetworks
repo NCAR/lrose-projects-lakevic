@@ -1,0 +1,10 @@
+#!/bin/csh -f
+
+cd $INGEST_HOME/params
+
+running "atecLtg2Spdb -params atecLtg2Spdb.EarthNetworks"
+if ($status == 1) then
+  echo "atecLtg2Spdb -params atecLtg2Spdb.EarthNetworks"
+  atecLtg2Spdb -params atecLtg2Spdb.EarthNetworks |& LogFilter -d $LOG_DIR -p atecLtg2Spdb -i EarthNetworks &
+endif
+#

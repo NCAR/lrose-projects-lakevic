@@ -1,0 +1,13 @@
+#! /bin/csh -f
+
+cd $RAP_DATA_DIR
+
+#
+# The default instance for the DsServerMgr is primary
+#
+running "DsServerMgr"
+if ($status == 1) then
+    echo "DsServerMgr"
+#    DsServerMgr -verbose |& LogFilter -d $LOG_DIR -p DsServerMgr  -i primary  &
+    DsServerMgr |& LogFilter -d $LOG_DIR -p DsServerMgr  -i primary  &
+endif

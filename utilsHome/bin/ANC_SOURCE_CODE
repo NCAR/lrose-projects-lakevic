@@ -1,0 +1,33 @@
+#! /bin/csh -f 
+
+set libs = ( Fmq Mdv Spdb dataport \
+             didss dsdata dsserver euclid \
+             ncf perl5 python physics \
+             rapformats rapmath symprod tdrp \
+             toolsa NcfMdv Radx radar kd \
+             Ncxx)
+
+set extras =      ( incs make_include make_bin )
+set utilities =   ( niwot )
+set scripts =     ( scripts/src/rm_core scripts/src/running scripts/src/snuff \
+                    scripts/src/snuff_inst scripts/src/utime_decode )
+set dsserver =    ( dsserver/src/Bdry2Symprod dsserver/src/DataMapper dsserver/src/DsFmqServer \
+                    dsserver/src/DsFmqServer dsserver/src/DsFCopyServer dsserver/src/DsFileDist \
+                    dsserver/src/DsMdvServer dsserver/src/DsServerMgr dsserver/src/DsSpdbServer \
+                    dsserver/src/DsTitanServer dsserver/src/DsLdataServer dsserver/src/GenPoly2Symprod \
+                    dsserver/src/GenPt2Symprod dsserver/src/Ltg2Symprod dsserver/src/Metar2Symprod \
+                    dsserver/src/NcMdvServer dsserver/src/PrintDataMap dsserver/src/Sounding2Sndg \
+                    dsserver/src/Tstorms2Symprod dsserver/src/SpdbQuery )
+set filters =     ( filters/src/LogFilter )
+set ingest  =     ( ingest/src/atecLtg2Spdb ingest/src/MSG3Sat2Mdv)
+set procmap =     ( procmap/src/print_procmap procmap/src/procmap procmap/src/procmap_register \
+                    procmap/src/procmap_unregister procmap/src/scripts )
+set tdrp =        ( tdrp/src/tdrp_gen )
+set Radx =        ( Radx/src/Radx2Dsr Radx/src/Radx2Grid Radx/src/RadxConvert Radx/src/RadxTest \
+                    Radx/src/Dsr2Radx Radx/src/RadxMergeFields Radx/src/RadxPartRain \
+                    Radx/src/RadxPrint Radx/src/RadxCheck Radx/src/RadxDiff Radx/src/RadxFilter \
+                    Radx/src/RadxQpe Radx/src/RadxBeamBlock)
+#
+# This directory list must contain the apps lists above or that list will not be built
+#
+set apps_dir_list =    ($dsserver $filters $ingest $procmap $tdrp $Radx)

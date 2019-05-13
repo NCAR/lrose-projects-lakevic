@@ -1,0 +1,10 @@
+#!/bin/csh -f
+
+cd $DATA_HOME/params
+
+running "Janitor -params Janitor.netcdf_meteosat-11"
+if ($status == 1) then
+  echo "Janitor -params Janitor.netcdf_meteosat-11"
+  Janitor -params Janitor.netcdf_meteosat-11 |& LogFilter -d $LOG_DIR -p Janitor -i netcdf_meteosat-11 &
+endif
+#

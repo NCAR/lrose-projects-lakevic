@@ -1,0 +1,10 @@
+#!/bin/csh -f
+
+cd $INGEST_HOME/params
+
+running "MdvCombine -params MdvCombine.meteosat-11"
+if ($status == 1) then
+  echo "MdvCombine -params MdvCombine.meteosat-11"
+  MdvCombine -params MdvCombine.meteosat-11 |& LogFilter -d $LOG_DIR -p MdvCombine -i meteosat-11 &
+endif
+#

@@ -1,0 +1,383 @@
+/**********************************************************************
+ * TDRP params for MSG3Sat2Mdv
+ **********************************************************************/
+
+//======================================================================
+//
+// Param file for MSG32Mdv.
+//
+//======================================================================
+ 
+///////////// debug ///////////////////////////////////
+//
+// Debug option.
+//
+// If set, debug messages will be printed appropriately.
+//
+//
+// Type: enum
+// Options:
+//     DEBUG_OFF
+//     DEBUG_NORM
+//     DEBUG_VERBOSE
+//
+
+debug = DEBUG_NORM;
+
+///////////// instance ////////////////////////////////
+//
+// Program instance for process registration.
+//
+// This program registers with procmap. This is the instance used for 
+//   registration.
+//
+//
+// Type: string
+//
+
+instance = "level1.5";
+
+///////////// mode ////////////////////////////////////
+//
+// Operating mode.
+//
+//
+// Type: enum
+// Options:
+//     REALTIME
+//     FILELIST
+//     TIME_INTERVAL
+//
+
+mode = TIME_INTERVAL;
+
+//======================================================================
+//
+// INPUT DATA.
+//
+//======================================================================
+ 
+///////////// lat_fieldname ///////////////////////////
+//
+// Geolocation latitude information.
+//
+//
+// Type: string
+//
+
+lat_fieldname = "lat";
+
+///////////// lon_fieldname ///////////////////////////
+//
+// Geolocation longitude information.
+//
+//
+// Type: string
+//
+
+lon_fieldname = "lon";
+
+///////////// fields //////////////////////////////////
+//
+// Satellite data fieldname.
+//
+// See 
+//   http://www.eumetsat.int/website/home/Data/Products/Calibration/MSGCali
+//   bration/index.html for The Conversion from Effective Radiances to 
+//   Equivalent Brightness Temperatures pdf and Conversion from radiances 
+//   to reflectances for SEVIRI warm channels (PDF). For warm channel 
+//   conversion, the struct member nu will hold Band Solar Irradiance 
+//   Constant at 1 AU (expressed in mW*m^-2*(cm^-1)^-1). Otherwise, nu, 
+//   alpha, and beta are as in the paper: The Conversion from Effective 
+//   Radiances to Equivalent Brightness Temperatures. .
+//
+//
+// Type: struct
+//   typedef struct {
+//      string ncfFieldName;
+//      string mdvFieldName;
+//      string units;
+//      boolean applyWarmChannelAnalyticTempConversion;
+//      float nu;
+//      float alpha;
+//      float beta;
+//   }
+//
+// 1D array - variable length.
+//
+
+fields = {
+  {
+    ncfFieldName = "ch1",
+    mdvFieldName = "0.6micron",
+    units = "mW m-2 sr-1(cm-1)-1",
+    applyWarmChannelAnalyticTempConversion = TRUE,
+    nu = 65.5148,
+    alpha = 1,
+    beta = 1
+  }
+  ,
+  {
+    ncfFieldName = "ch2",
+    mdvFieldName = "0.8micron",
+    units = "mW m-2 sr-1(cm-1)-1",
+    applyWarmChannelAnalyticTempConversion = TRUE,
+    nu = 73.1807,
+    alpha = 1,
+    beta = 1
+  }
+  ,
+  {
+    ncfFieldName = "ch3",
+    mdvFieldName = "1.6micron",
+    units = "mW m-2 sr-1(cm-1)-1",
+    applyWarmChannelAnalyticTempConversion = TRUE,
+    nu = 62.0208,
+    alpha = 1,
+    beta = 1
+  }
+  ,
+// values from [7.2.3 Table for MSG FM-3]
+  {
+    ncfFieldName = "ch4",
+    mdvFieldName = "3.9micron",
+    units = "mW m-2 sr-1(cm-1)-1",
+    applyWarmChannelAnalyticTempConversion = FALSE,
+    nu = 2555.28,
+    alpha = 0.9916,
+    beta = 2.9438
+  }
+  ,
+  {
+    ncfFieldName = "ch5",
+    mdvFieldName = "6.2micron",
+    units = "mW m-2 sr-1(cm-1)-1",
+    applyWarmChannelAnalyticTempConversion = FALSE,
+    nu = 1596.08,
+    alpha = 0.9959,
+    beta = 2.078
+  }
+  ,
+  {
+    ncfFieldName = "ch6",
+    mdvFieldName = "7.3micron",
+    units = "mW m-2 sr-1(cm-1)-1",
+    applyWarmChannelAnalyticTempConversion = FALSE,
+    nu = 1361.75,
+    alpha = 0.999,
+    beta = 0.4929
+  }
+  ,
+  {
+    ncfFieldName = "ch7",
+    mdvFieldName = "8.7micron",
+    units = "mW m-2 sr-1(cm-1)-1",
+    applyWarmChannelAnalyticTempConversion = FALSE,
+    nu = 1147.43,
+    alpha = 0.9996,
+    beta = 0.1731
+  }
+  ,
+  {
+    ncfFieldName = "ch8",
+    mdvFieldName = "9.7micron",
+    units = "mW m-2 sr-1(cm-1)-1",
+    applyWarmChannelAnalyticTempConversion = FALSE,
+    nu = 1034.85,
+    alpha = 0.9998,
+    beta = 0.0597
+  }
+  ,
+  {
+    ncfFieldName = "ch9",
+    mdvFieldName = "10.8micron",
+    units = "mW m-2 sr-1(cm-1)-1",
+    applyWarmChannelAnalyticTempConversion = FALSE,
+    nu = 931.122,
+    alpha = 0.9983,
+    beta = 0.6256
+  }
+  ,
+  {
+    ncfFieldName = "ch10",
+    mdvFieldName = "12.0micron",
+    units = "mW m-2 sr-1(cm-1)-1",
+    applyWarmChannelAnalyticTempConversion = FALSE,
+    nu = 839.113,
+    alpha = 0.9988,
+    beta = 0.4002
+  }
+  ,
+  {
+    ncfFieldName = "ch11",
+    mdvFieldName = "13.4micron",
+    units = "mW m-2 sr-1(cm-1)-1",
+    applyWarmChannelAnalyticTempConversion = FALSE,
+    nu = 748.585,
+    alpha = 0.9981,
+    beta = 0.5635
+  }
+};
+
+///////////// xdim ////////////////////////////////////
+//
+// Name of x dimension of data fields.
+//
+// All fields have same x dimension.
+//
+//
+// Type: string
+//
+
+xdim = "num_rows_vis_ir";
+
+///////////// ydim ////////////////////////////////////
+//
+// Name of y dimension of data fields.
+//
+// All fields have same x dimension.
+//
+//
+// Type: string
+//
+
+ydim = "num_columns_vis_ir";
+
+///////////// input_dir ///////////////////////////////
+//
+// Input directory.
+//
+//
+// Type: string
+//
+
+input_dir = "$(RAP_DATA_DIR)/$(PROJECT)/raw/satellite/meteosat-10/netcdf";
+
+///////////// max_valid_realtime_age_min //////////////
+//
+// Maximum age of file in minutes.
+//
+// Used in REALTIME mode only.
+//
+//
+// Type: int
+//
+
+max_valid_realtime_age_min = 15;
+
+///////////// ldata_info_avail ////////////////////////
+//
+// Latest data info file available.
+//
+//
+// Type: boolean
+//
+
+ldata_info_avail = FALSE;
+
+///////////// file_quiescence_sec /////////////////////
+//
+// Set wait for file to be written to disk before being served.
+//
+// Used in REALTIME mode only.
+//
+//
+// Type: int
+//
+
+file_quiescence_sec = 5;
+
+///////////// check_input_sec /////////////////////////
+//
+// Set wait for file between checks for new data.
+//
+// Used in REALTIME mode only.
+//
+//
+// Type: int
+//
+
+check_input_sec = 5;
+
+///////////// start_time //////////////////////////////
+//
+// yyyymmddhhMMss.
+//
+// Set for TIME_INTERVAL mode only.
+//
+//
+// Type: string
+//
+
+start_time = "";
+
+///////////// end_time ////////////////////////////////
+//
+// yyyymmddhhMMss.
+//
+// Set for TIME_INTERVAL mode only.
+//
+//
+// Type: string
+//
+
+end_time = "";
+
+///////////// output_proj /////////////////////////////
+//
+// Output projection.
+//
+//
+// Type: struct
+//   typedef struct {
+//      proj_type_t proj_type;
+//        Options:
+//          PROJ_FLAT
+//          PROJ_LATLON
+//          PROJ_LC2
+//      double minx;
+//      double miny;
+//      int nx;
+//      int ny;
+//      double dx;
+//      double dy;
+//      double origin_lat;
+//      double origin_lon;
+//      double rotation;
+//      double lat1;
+//      double lat2;
+//   }
+//
+//
+
+output_proj = {
+    proj_type = PROJ_LATLON,
+    minx = 25,
+    miny = -10,
+    nx = 500,
+    ny = 500,
+    dx = 0.045,
+    dy = 0.045,
+    origin_lat = 0,
+    origin_lon = 0,
+    rotation = 0,
+    lat1 = 0,
+    lat2 = 0
+};
+
+//======================================================================
+//
+// OUTPUT DATA.
+//
+//======================================================================
+ 
+///////////// output_url //////////////////////////////
+//
+// URL for the output MDV files.
+//
+//
+// Type: string
+//
+
+output_url = "mdvp:://localhost::$(PROJECT)/mdv/satellite/meteosat-11";
+

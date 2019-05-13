@@ -1,0 +1,9 @@
+
+# Hostnames for NIWOT operations
+#
+# NOTE:  This file is used by serveral utilities within the ANC
+#        Most importantly, all hosts in this file have auto_restart
+#        initiated on them during niwot_startup.
+#
+
+setenv PROCESSING_HOST	   lakevic.rap.ucar.edu

@@ -1,0 +1,18 @@
+#!/bin/csh -f
+#
+
+set WORK_DIR=$cwd
+
+source ANC_SOURCE_CODE
+
+cd $ANC_DIR/bin
+foreach dir ( $apps_dir_list)
+    foreach app ($dir)
+	set app_name=`echo $app | cut -d'/' -f3`
+	if(! -e $app_name ) then
+	    echo "Missing application $app_name"
+	endif
+    end
+end
+
+exit

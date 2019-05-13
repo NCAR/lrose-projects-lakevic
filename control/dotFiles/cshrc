@@ -1,0 +1,247 @@
+#
+# $Id: cshrc,v 1.1 2018/11/08 22:04:30 nowcast Exp $
+#
+umask 002
+set path = ( /usr/local/jdk/bin /bin /usr/bin /opt/bin /usr/ucb /usr/local/bin \
+             /usr/bin/X11/ /usr/X11R6/bin /usr/openwin/bin  \
+             /usralias/games /usr/local/hpss/bin $HOME/bin . )
+
+unset autologout
+limit coredumpsize unlimited
+
+#
+# For interactive shells
+#
+if ($?prompt) then
+   set history=100
+   set filec
+   set prompt=${user}@`hostname`:`basename ${cwd}`" \!% "
+endif
+
+#
+# for local RAP builds
+#
+setenv HOST_OS               LINUX_CX11
+setenv MODEL		     WRF_RR
+
+setenv ANC_DIR               /home/nowcast/anc
+setenv DATA_PATH             /d1/nowcast/fieldData
+
+setenv RAP_INC_DIR           $ANC_DIR/include
+setenv RAP_LIB_DIR           $ANC_DIR/lib
+setenv RAP_BIN_DIR           $ANC_DIR/bin
+setenv RAP_MAN_DIR           $ANC_DIR/man
+setenv RAP_DOC_DIR           $ANC_DIR/doc
+setenv RAP_MAKE_INC_DIR      $ANC_DIR/make_include
+setenv RAP_MAKE_BIN_DIR      $ANC_DIR/make_bin
+
+setenv RAP_SHARED_INC_DIR    $ANC_DIR/include
+setenv RAP_SHARED_LIB_DIR    $ANC_DIR/lib
+setenv RAP_SHARED_BIN_DIR    $ANC_DIR/bin
+setenv RAP_SHARED_MAN_DIR    $ANC_DIR/man
+setenv RAP_SHARED_DOC_DIR    $ANC_DIR/doc
+
+#
+# for Nowcasting...
+#
+setenv PROJECT           lakevic
+set prompt = "`echo %B%U\[project-$PROJECT\]`%b%u ${HOST}:%~->"
+setenv PROJ_DIR          $ANC_DIR/projects/$PROJECT
+
+setenv VDRAS_HOME        $PROJ_DIR/vdrasHome
+setenv ADVECT_HOME       $PROJ_DIR/advectHome
+setenv AWIPS_HOME        $PROJ_DIR/awipsHome
+setenv CIDD_HOME         $PROJ_DIR/displayHome
+setenv COLIDE_HOME       $PROJ_DIR/colideHome
+setenv DISPLAY_HOME      $PROJ_DIR/displayHome
+setenv CRONUS_HOME       $PROJ_DIR/cronusHome
+setenv EXTRAP_HOME       $PROJ_DIR/extrapHome
+setenv PRECIP_HOME       $PROJ_DIR/precipHome
+setenv RADAR_HOME	 $PROJ_DIR/radarHome
+setenv SATELLITE_HOME    $PROJ_DIR/satelliteHome
+setenv INGEST_HOME       $PROJ_DIR/ingestHome
+setenv TITAN_HOME        $PROJ_DIR/titanHome
+setenv UTILS_HOME	 $PROJ_DIR/utilsHome
+setenv DATA_HOME         $PROJ_DIR/dataHome
+setenv VERIFY_HOME       $PROJ_DIR/verifyHome
+setenv SYSVIEW_HOME      $PROJ_DIR/sysviewHome
+setenv LDM_HOME          $PROJ_DIR/ldmHome
+setenv STABILITY_HOME    $PROJ_DIR/stabilityHome
+setenv NSSL_INGEST_HOME  $PROJ_DIR/nsslIngestHome
+setenv SIMULATOR_HOME    $PROJ_DIR/simulatorHome
+setenv RUNALGS_HOME      $PROJ_DIR/runAlgsHome
+setenv EXPORT_HOME	 $PROJ_DIR/exportHome
+setenv QPE_HOME          $PROJ_DIR/qpeHome
+
+setenv CONTROL_DIR       $PROJ_DIR/control
+setenv CONTROL_LOCAL_DIR $HOME/controlLocal
+setenv LOG_DIR           $HOME/logs
+setenv DATA_DIR          $HOME/data
+setenv RAP_DATA_DIR      $HOME/data
+
+setenv NIWOT_DIR         $ANC_DIR/utilities/niwot
+
+setenv PROCMAP_HOST      localhost
+setenv DATA_MAPPER_ACTIVE true 
+
+setenv LDMHOME $HOME
+setenv VERSIONDIR $HOME/ldm-6.10.1
+
+#
+# --- For Java & SysView ---
+#
+# setenv LD_LIBRARY_PATH       $RAP_LIB_DIR
+setenv LD_LIBRARY_PATH "/usr/lib:/usr/local/lib:/usr/local/netcdf4/lib:/usr/local/hdf5/lib:/usr/local/zlib/lib:/usr/local/szip/lib:${RAP_LIB_DIR}"
+setenv WORK_JAVA_DIR         $ANC_DIR/java_bin
+setenv WORK_SHARED_JAVA_DIR  $ANC_DIR/java_bin
+setenv CLASSPATH             $ANC_DIR/java_packages:$ANC_DIR/java_packages/edu/ucar/rap_japps
+setenv JAVA_HOME             /usr/local/jdk7
+
+setenv PYTHONPATH $ANC_DIR/lib/python
+
+#
+# for auto-restarter
+#
+setenv RSH "ssh -x"
+
+#
+# Set host names for running nowcast processes
+#
+if (-e $CONTROL_LOCAL_DIR/runtime/HOST_ENV) then
+	source $CONTROL_LOCAL_DIR/runtime/HOST_ENV
+endif
+
+if (-e $CONTROL_DIR/params/grid.env) then
+	source $CONTROL_DIR/params/grid.env
+endif
+
+set path = (  $path \
+              /usr/sbin \
+              $RAP_BIN_DIR \
+              $RAP_SHARED_BIN_DIR \
+              $PROJ_DIR/bin \
+              $NIWOT_DIR \
+              $HOME/bin \
+              $VDRAS_HOME/bin \
+              $ADVECT_HOME/bin \
+              $AWIPS_HOME/bin \
+              $CIDD_HOME/bin  \
+              $COLIDE_HOME/bin \
+              $CRONUS_HOME/bin \
+              $DATA_HOME/bin \
+              $INGEST_HOME/bin \
+              $RADAR_HOME/bin \
+	      $TITAN_HOME/bin \
+	      $STABILITY_HOME/bin \
+              $SATELLITE_HOME/bin \
+	      $SIMULATOR_HOME/bin \
+              $EXTRAP_HOME/bin \
+              $PRECIP_HOME/bin \
+              $UTILS_HOME/bin \
+              $VERIFY_HOME/bin \
+              $SYSVIEW_HOME/bin \
+              $WORK_JAVA_DIR \
+              $LDMHOME/decoders \
+              $LDMHOME/util \
+              $LDMHOME/bin \
+              $NSSL_INGEST_HOME/bin \
+              $RUNALGS_HOME/bin \
+              $QPE_HOME/bin \
+	      $EXPORT_HOME/bin )
+
+
+#
+# for DDD and debugging...
+#
+setenv XKEYSYMDB /usr/lib/X11/XKeysymDB
+setenv XNLSPATH /usr/lib/X11/nls
+
+setenv EDITOR emacs
+
+#
+# Stuff for the PGI compiler.
+#
+setenv PGI /opt/pgi
+setenv LD_LIBRARY_PATH ${LD_LIBRARY_PATH}:/usr/local/lib:/nfs/ncar/rap/lib:/opt/pgi/lib:/usr/local/udunits2/lib/
+setenv LM_LICENSE_FILE /opt/pgi/license.dat
+set path = ($path $PGI/bin)
+#
+#
+# some useful aliases...
+#
+alias stripCvs  'find . -name CVS -exec rm -r {} \;'
+alias java      '$JAVA_HOME/bin/java'
+alias javac     '$JAVA_HOME/bin/javac'
+alias jar       '$JAVA_HOME/bin/jar'
+
+alias ssh       'ssh -X '
+alias c         'clear'
+alias catw      'cat `which \!*`'
+#alias cd        'cd \!* ; sp'
+alias cshrc     'vi ~/.cshrc ; source ~/.cshrc'
+alias es        'echo $status'
+alias h         'history'
+alias ls        'ls -CF'
+alias over      'cd ../\!^'
+alias psg	'ps axww | sed -n "1p; \|sed .*/\!*/|d; /\!*/p"'
+alias psug	'ps axuww | sed -n "1p; \|sed .*/\!*/|d; /\!*/p"'
+alias psn 	'ps axuww | grep ${user}'
+alias rap       'cd ~/rap'
+alias sc        'source ~/.cshrc'
+alias sd        'setenv DISPLAY \!*":0.0"; echo $DISPLAY'
+alias sp        'set prompt=${user}@`hostname`:`basename ${cwd}`" \\!% "'
+alias tailog    'tail -f $CONTROL_LOCAL_DIR/runtime/auto_restart.log'
+alias up        'cd ..'
+alias viw       'vi `which \!*`'
+unalias rm
+alias vp        'vi $CONTROL_LOCAL_DIR/runtime/PROCESS_LIST'
+alias ep        'emacs $CONTROL_LOCAL_DIR/runtime/PROCESS_LIST'
+alias emacs     'emacs -fg white -bg black '
+alias demacs    'emacs -l $CONTROL_DIR/dotFiles/emacs'
+
+alias rap  'cd $ANC_DIR'
+alias raps 'cd $ANC_DIR'
+alias incs 'cd $ANC_DIR/incs'
+alias slibs 'cd $ANC_DIR/libs'
+alias sapps 'cd $ANC_DIR/apps'
+alias libs 'cd $ANC_DIR/libs'
+alias apps 'cd $ANC_DIR/apps'
+
+alias proj 'cd $PROJ_DIR'
+alias data 'cd $DATA_DIR/$PROJECT'
+alias d1   'cd /d1/nowcast/fieldData/$PROJECT'
+alias d2   'cd /d2/nowcast/fieldData/$PROJECT'
+alias d3   'cd /d3/nowcast/fieldData/$PROJECT'
+alias fd1  'cd /d1/nowcast/fieldData/front'
+alias fd2  'cd /d2/nowcast/fieldData/front'
+alias fd3  'cd /d3/nowcast/fieldData/front'
+alias mdv  'cd $DATA_DIR/$PROJECT/mdv'
+alias netCDF  'cd $DATA_DIR/$PROJECT/netCDF'
+alias raw  'cd $DATA_DIR/$PROJECT/raw'
+alias spdb 'cd $DATA_DIR/$PROJECT/spdb'
+alias fmq  'cd $DATA_DIR/$PROJECT/fmq'
+alias logs 'cd $LOG_DIR/`date -u +%Y%m%d`'
+alias src  'cd /d1/nowcast/anc/apps/adjoint/src'
+alias mdv2 'cd /d1/nowcast/Morakot/mdv'
+
+alias control "cd $PROJ_DIR/control"
+alias pp   'print_procmap -up -hb -c 5'
+alias pd   'PrintDataMap -all -c 5'
+
+setenv UT_TIMEZONE GMT
+
+# Setup CVS repository at MDL
+setenv CVSROOT :pserver:nowcast@cvs:/cvs
+setenv CVS_RSH ssh
+
+
+#-----------------------------------
+#  for GCC 4.4+
+setenv LD_LIBRARY_PATH ${LD_LIBRARY_PATH}:/home/nowcast/bin/gcc4.4/lib
+
+
+#----------------------------------
+#  for CWB person linyh
+#-----------------------------------
+alias ml 'source ~/.mlinyh'
+alias CIDDParams 'cd  /d1/nowcast/anc/projects/front_porch/displayHome/params'

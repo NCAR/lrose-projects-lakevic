@@ -1,0 +1,12 @@
+#! /bin/csh 
+
+cd $DISPLAY_HOME/params
+
+setenv DISPLAY :99
+
+running "LdataWatcher -params LdataWatcher.satIrLtg5minImgDump"
+if ($status == 1) then
+  echo "LdataWatcher -params LdataWatcher.satIrLtg5minImgDump"
+  LdataWatcher -params LdataWatcher.satIrLtg5minImgDump |& LogFilter -d $LOG_DIR -p LdataWatcher -i satIrLtg5minImgDump >& /dev/null &
+endif
+

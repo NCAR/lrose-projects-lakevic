@@ -1,0 +1,33 @@
+#! /bin/csh
+#
+
+set called=($_)
+
+#
+# called by source
+#
+if ( "$called" != "" ) then
+    set script_fn=`readlink -f $called[2]`
+#	
+# called by direct excution of the script
+#
+else                         
+    set script_fn=`readlink -f $0`
+endif
+
+set script_dir=`dirname $script_fn`
+setenv SCRIPT_DIR `dirname $script_fn`
+
+cd $script_dir
+	
+setenv DBZ_NAME    DBZ
+setenv WIDTH_NAME  WIDTH
+setenv SNR_NAME    SNRHC
+setenv AIQ_NAME    AIQ
+setenv NIQ_NAME    NIQ
+setenv DM_NAME     DM
+setenv LATITUDE   39.9502
+setenv LONGITUDE  -105.195
+    
+./CIDD -p ../params/CIDD.lakevic -verbose   
+

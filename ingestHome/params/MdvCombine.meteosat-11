@@ -1,0 +1,300 @@
+/**********************************************************************
+ * TDRP params for MdvCombine
+ **********************************************************************/
+
+//======================================================================
+//
+// DEBUGGING AND PROCESS CONTROL.
+//
+//======================================================================
+ 
+///////////// debug ///////////////////////////////////
+//
+// Debug option.
+//
+// If set, debug messages will be printed appropriately.
+//
+//
+// Type: boolean
+//
+
+debug = FALSE;
+
+///////////// instance ////////////////////////////////
+//
+// Process instance.
+//
+// Used for registration with procmap.
+//
+//
+// Type: string
+//
+
+instance = "meteosat-11";
+
+///////////// mode ////////////////////////////////////
+//
+// Operation mode.
+//
+// In REALTIME mode, the program waits for new data from the MDV 
+//   location specified by the trigger_url parameter.
+// In ARCHIVE mode, the program operates on archive data.
+//  In SPEC_FCAST_REALTIME mode, the program waits for new forecast data 
+//   from the MDV location specified by the trigger_url parameter.
+// In MULTIPLE_URL mode, the program will not run until data is 
+//   available for all of the URLs in the multiple_url_trigger.
+//
+//
+// Type: enum
+// Options:
+//     ARCHIVE
+//     REALTIME
+//     MULTIPLE_URL
+//     SPEC_FCAST_REALTIME
+//
+
+mode = REALTIME;
+
+///////////// fcast_lead_time /////////////////////////
+//
+// Forecast lead time information for forecast files to be processed.
+//
+// Used only if mode is set to SPEC_FCAST_REALTIME or if  write_forecast 
+//   is set to TRUE.
+//
+//
+// Type: struct
+//   typedef struct {
+//      int lead_time_secs;
+//      boolean use_gen_time;
+//   }
+//
+//
+
+fcast_lead_time = {
+    lead_time_secs = 0,
+    use_gen_time = FALSE
+};
+
+//======================================================================
+//
+// DATA INPUT.
+//
+//======================================================================
+ 
+///////////// field_info //////////////////////////////
+//
+// An array of field descriptors.
+//
+// If available, the indicated field from each URL will be combined in 
+//   the output file. If field_name is specified it will be used. 
+//   Otherwise, field_num will be used.
+//
+//
+// Type: struct
+//   typedef struct {
+//      string url;
+//      long field_num;
+//      string field_name;
+//   }
+//
+// 1D array - variable length.
+//
+
+field_info = {
+  {
+    url = "mdvp:://localhost::$(PROJECT)/mdv/satellite/meteosat-11/HRV_0.6micron",
+    field_num = 0,
+    field_name = "0.6micron"
+  }
+  ,
+  {
+    url = "mdvp:://localhost::$(PROJECT)/mdv/satellite/meteosat-11/0.6micron",
+    field_num = 0,
+    field_name = "0.60micron"
+  }
+  ,
+  {
+    url = "mdvp:://localhost::$(PROJECT)/mdv/satellite/meteosat-11/0.8micron",
+    field_num = 0,
+    field_name = "0.8micron"
+  }
+  ,
+  {
+    url = "mdvp:://localhost::$(PROJECT)/mdv/satellite/meteosat-11/1.6micron",
+    field_num = 0,
+    field_name = "1.6micron"
+  }
+  ,
+  {
+    url = "mdvp:://localhost::$(PROJECT)/mdv/satellite/meteosat-11/3.9micron",
+    field_num = 1,
+    field_name = "3.9micron"
+  }
+  ,
+  {
+    url = "mdvp:://localhost::$(PROJECT)/mdv/satellite/meteosat-11/6.2micron",
+    field_num = 1,
+    field_name = "6.2micron"
+  }
+  ,
+  {
+    url = "mdvp:://localhost::$(PROJECT)/mdv/satellite/meteosat-11/7.3micron",
+    field_num = 1,
+    field_name = "7.3micron"
+  }
+  ,
+  {
+    url = "mdvp:://localhost::$(PROJECT)/mdv/satellite/meteosat-11/8.7micron",
+    field_num = 1,
+    field_name = "8.7micron"
+  }
+  ,
+  {
+    url = "mdvp:://localhost::$(PROJECT)/mdv/satellite/meteosat-11/9.7micron",
+    field_num = 1,
+    field_name = "9.7micron"
+  }
+  ,
+  {
+    url = "mdvp:://localhost::$(PROJECT)/mdv/satellite/meteosat-11/10.8micron",
+    field_num = 1,
+    field_name = "10.8micron"
+  }
+  ,
+  {
+    url = "mdvp:://localhost::$(PROJECT)/mdv/satellite/meteosat-11/12.0micron",
+    field_num = 1,
+    field_name = "12.0micron"
+  }
+  ,
+  {
+    url = "mdvp:://localhost::$(PROJECT)/mdv/satellite/meteosat-11/13.4micron",
+    field_num = 1,
+    field_name = "13.4micron"
+  }
+};
+
+///////////// trigger_url /////////////////////////////
+//
+// Trigger URL.
+//
+// This URL triggers the combination of the URLs list in field_info.
+//
+//
+// Type: string
+//
+
+trigger_url = "mdvp:://localhost::$(PROJECT)/mdv/satellite/meteosat-11/HRV_0.6micron";
+
+///////////// sleepAfterTrigger ///////////////////////
+//
+// Number of seconds to sleep after triggering before processing the 
+//   data. The intent is to allow realtime URLs that come in nearly 
+//   simultaneously to have a chance to catch up.
+//
+// Only applies in REALTIME or SPEC_FCAST_REALTIME modes.
+//
+//
+// Type: int
+//
+
+sleepAfterTrigger = 15;
+
+///////////// time_trigger_interval ///////////////////
+//
+// Interval for TIME_TRIGGER - secs.
+//
+// In REALTIME mode, a time trigger always occurs on the hour, and at 
+//   constant intervals thereafter. In ARCHIVE mode the trigger starts at 
+//   start_time and at constant intervals thereafter.
+//
+// Minimum val: 0
+//
+// Type: long
+//
+
+time_trigger_interval = 300;
+
+///////////// multiple_url_trigger ////////////////////
+//
+// List of URLs for triggering in latest data mode.
+//
+//
+// Type: string
+// 1D array - variable length.
+//
+
+multiple_url_trigger = {
+ "mdvp:://localhost::mdv"
+};
+
+//======================================================================
+//
+// DATA OUTPUT.
+//
+//======================================================================
+ 
+///////////// output_url //////////////////////////////
+//
+// Output URL.
+//
+// The merged files are placed in this URL.
+//
+//
+// Type: string
+//
+
+output_url = "mdvp:://localhost::$(PROJECT)/mdv/satellite/meteosat-11";
+
+///////////// data_set_name ///////////////////////////
+//
+// Data set name.
+//
+// This is placed in the MDV master header for documentation purposes.
+//
+//
+// Type: string
+//
+
+data_set_name = "Mcidas";
+
+///////////// data_set_source /////////////////////////
+//
+// Data set source details.
+//
+// This is placed in the MDV master header for documentation purposes.
+//
+//
+// Type: string
+//
+
+data_set_source = "EOL";
+
+///////////// write_forecast //////////////////////////
+//
+// Write mdv files in a forecast directory structure.
+//
+// If this is true, mdv files will be written in the rap forecast 
+//   directory structure. If this is FALSE, mdv files will be written in 
+//   the rap non-forecast directory structure.
+//
+//
+// Type: boolean
+//
+
+write_forecast = FALSE;
+
+///////////// write_blank_if_missing //////////////////
+//
+// Write missing fields with missing data.
+//
+// If this is true, the fields that were missing will be written to the 
+//   output file with each gridpoint set to the missing data value.
+//
+//
+// Type: boolean
+//
+
+write_blank_if_missing = FALSE;
+

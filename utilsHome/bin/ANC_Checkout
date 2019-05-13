@@ -1,0 +1,38 @@
+#! /bin/csh -f
+
+set WORK_DIR=$cwd
+
+#
+# Ckeck out source for 64-bit builds
+#
+source ANC_SOURCE_CODE
+
+if (! -d $ANC_DIR) then
+    mkdir -p $ANC_DIR
+endif
+
+cd $ANC_DIR 
+
+foreach lib ($libs )
+    cvs co libs/$lib
+end
+
+foreach extra ($extras)
+    cvs co $extra
+end
+
+foreach util ($utilities)
+    cvs co utilities/$util
+end
+
+foreach script ($scripts)
+    cvs co apps/$script
+end
+
+foreach dir ($apps_dir_list)
+    foreach app ($dir)
+	cvs co apps/$app
+    end
+end
+
+exit
