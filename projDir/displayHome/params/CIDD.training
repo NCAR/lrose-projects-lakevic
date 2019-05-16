@@ -54,9 +54,9 @@
 
 field_list = {
  { "Mwanza Radar",  "Mw_" },
- { "Rwanda Radar",  "Rw_" },
  { "Satellite",     "satellite" },
- { "Terrain",       "terrain" }
+ { "Terrain",       "terrain" },
+ { "Rwanda Radar",  "Rw_" }
 };
 
 </GUI_CONFIG>
@@ -671,7 +671,7 @@ cidd.xsect_start_page:      1
 #
 # The Outer most domain:
 cidd.num_zoom_levels:         8
-cidd.start_zoom_level:        1
+cidd.start_zoom_level:        3
 cidd.zoom_limits_in_latlon:   0
 
 # The number of Cached images for zooms.
@@ -746,7 +746,7 @@ cidd.level8_max_ykm:            3000.0
 cidd.min_ht:               0.25
 cidd.max_ht:               22.25
 cidd.ht_interval           0.5
-cidd.start_ht:             0.5
+cidd.start_ht:             1.0
 
 # Radial data Limits
 cidd.min_rkm:                0.0
@@ -1176,7 +1176,7 @@ cidd.wsddm_mode:            0
 # click and drag. When set to 1, disallows multi way point cross sections
 # - RHI are defined by clicking right mouse near the radar origin and
 # dragging away from the radar along the desired  azimuth and releasing.
-cidd.one_click_rhi: 0
+cidd.one_click_rhi: 1
 
 # CIDD uses the number pad keys 7,9,4,6,1,3 to rotate the RHI 
 # by +/- these amounts
@@ -1777,7 +1777,7 @@ land_use_render_method = RENDER_RECTANGLES;
 // Type: boolean
 //
 
-landuse_active = TRUE;
+landuse_active = FALSE;
 
 ///////////// earth_color1 ////////////////////////////
 //
