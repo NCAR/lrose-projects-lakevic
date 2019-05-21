@@ -56,7 +56,7 @@ field_list = {
  { "Mwanza Radar",  "Mw_" },
  { "Satellite",     "satellite" },
  { "Terrain",       "terrain" },
- { "Rwanda Radar",  "Rw_" }
+ { "UKMO NWP",     "UKMO" }
 };
 
 </GUI_CONFIG>
@@ -149,6 +149,11 @@ satellite ======   mdvp:://localhost::$(DATA_DIR)/unused&unused         dbz.colo
 satellite ======   mdvp:://localhost::$(DATA_DIR)/unused&unused         dbz.colors   dbz   0 0 0   cart  1 0
 satellite ======   mdvp:://localhost::$(DATA_DIR)/unused&unused         dbz.colors   dbz   0 0 0   cart  1 0
 
+satellite  satellite  mdvp:://localhost::unused&unused         dbz.colors   dbz   0 0 0   cart  1 0
+satellite  ______   mdvp:://localhost::unused&unused         dbz.colors   dbz   0 0 0   cart  1 0
+satellite  ______   mdvp:://localhost::unused&unused         dbz.colors   dbz   0 0 0   cart  1 0
+satellite  ______   mdvp:://localhost::unused&unused         dbz.colors   dbz   0 0 0   cart  1 0
+
 satellite 0.6micron   mdvp:://localhost::$(DATA_DIR)/mdv/satellite/meteosat-11&0.6micron      sat_cloud.colors   albedo  0 0 0   cart  1 0
 satellite 3.9micron   mdvp::KtoC//localhost::$(DATA_DIR)/mdv/satellite/meteosat-11&3.9micron  ch4_green.colors   C  0 0 0   cart  1 0
 satellite 6.2micron   mdvp::KtoC//localhost::$(DATA_DIR)/mdv/satellite/meteosat-11&6.2micron  ch3_64.colors      C  0 0 0   cart  1 0
@@ -176,51 +181,39 @@ terrain ______   mdvp:://localhost::$(DATA_DIR)/unused&unused         dbz.colors
 terrain ______   mdvp:://localhost::$(DATA_DIR)/unused&unused         dbz.colors   dbz   0 0 0   cart  1 0
 terrain ______   mdvp:://localhost::$(DATA_DIR)/unused&unused         dbz.colors   dbz   0 0 0   cart  1 0
 
-### Rwanda radar ###
+#### UKMO####
+UKMO ======   mdvp:://localhost::$(DATA_DIR)/unused&unused         dbz.colors   dbz   0 0 0   cart  1 0
+UKMO ======   mdvp:://localhost::$(DATA_DIR)/unused&unused         dbz.colors   dbz   0 0 0   cart  1 0
+UKMO ======   mdvp:://localhost::$(DATA_DIR)/unused&unused         dbz.colors   dbz   0 0 0   cart  1 0
+UKMO ======   mdvp:://localhost::$(DATA_DIR)/unused&unused         dbz.colors   dbz   0 0 0   cart  1 0
+UKMO UKMO     mdvp:://localhost::$(DATA_DIR)/unused&unused         dbz.colors   dbz   0 0 0   cart  1 0
+UKMO ______   mdvp:://localhost::$(DATA_DIR)/unused&unused         dbz.colors   dbz   0 0 0   cart  1 0
+UKMO ______   mdvp:://localhost::$(DATA_DIR)/unused&unused         dbz.colors   dbz   0 0 0   cart  1 0
+UKMO ______   mdvp:://localhost::$(DATA_DIR)/unused&unused         dbz.colors   dbz   0 0 0   cart  1 0
 
-Rw_bl   ======   mdvp:://localhost::$(DATA_DIR)/unused&unused         dbz.colors   dbz   0 0 0   cart  1 0
-Rw_bl   ======   mdvp:://localhost::$(DATA_DIR)/unused&unused         dbz.colors   dbz   0 0 0   cart  1 0
-Rw_bl   ======   mdvp:://localhost::$(DATA_DIR)/unused&unused         dbz.colors   dbz   0 0 0   cart  1 0
-Rw_bl   ======   mdvp:://localhost::$(DATA_DIR)/unused&unused         dbz.colors   dbz   0 0 0   cart  1 0
-Rw_bl   Rwanda   mdvp:://localhost::$(DATA_DIR)/unused&unused         dbz.colors   dbz   0 0 0   cart  1 0
-Rw_bl   ______   mdvp:://localhost::$(DATA_DIR)/unused&unused         dbz.colors   dbz   0 0 0   cart  1 0
-Rw_bl   ______   mdvp:://localhost::$(DATA_DIR)/unused&unused         dbz.colors   dbz   0 0 0   cart  1 0
-Rw_bl   ______   mdvp:://localhost::$(DATA_DIR)/unused&unused         dbz.colors   dbz   0 0 0   cart  1 0
+UKMO ======   mdvp:://localhost::$(DATA_DIR)/unused&unused         dbz.colors   dbz   0 0 0   cart  1 0
+UKMO ======   mdvp:://localhost::$(DATA_DIR)/unused&unused         dbz.colors   dbz   0 0 0   cart  1 0
+UKMO ======   mdvp:://localhost::$(DATA_DIR)/unused&unused         dbz.colors   dbz   0 0 0   cart  1 0
+UKMO ======   mdvp:://localhost::$(DATA_DIR)/unused&unused         dbz.colors   dbz   0 0 0   cart  1 0
+UKMO UK_model mdvp:://localhost::$(DATA_DIR)/unused&unused         dbz.colors   dbz   0 0 0   cart  1 0
+UKMO ======   mdvp:://localhost::$(DATA_DIR)/unused&unused         dbz.colors   dbz   0 0 0   cart  1 0
+UKMO ======   mdvp:://localhost::$(DATA_DIR)/unused&unused         dbz.colors   dbz   0 0 0   cart  1 0
+UKMO ======   mdvp:://localhost::$(DATA_DIR)/unused&unused         dbz.colors   dbz   0 0 0   cart  1 0
 
-Rw_DBZ      Rw_DBZ      mdvp:://localhost::$(DATA_DIR)/mdv/rwanda/radar/kigali&DBZ   dbz.colors   dbz   0 0 0   cart  1 0
-Rw_DBZ_F    Rw_DBZ_F    mdvp:://localhost::$(DATA_DIR)/mdv/rwanda/radar/kigali&DBZ_F   dbz.colors   dbz   0 0 0   cart  1 0
-Rw_DBZVC    Rw_DBZVC    mdvp:://localhost::$(DATA_DIR)/mdv/rwanda/radar/kigali&DBZVC   dbz.colors   dbz   0 0 0   cart  1 0 
-Rw_DBZVC_F  Rw_DBZVC_F  mdvp:://localhost::$(DATA_DIR)/mdv/rwanda/radar/kigali&DBZVC_F   dbz.colors   dbz   0 0 0   cart  1 0
+UKMO Temp        mdvp:://localhost::$(DATA_DIR)/mdv/model/African/temp&temp           temp.colors          C      0 0 0   cart  1 0
+UKMO Temp_1.5m   mdvp:://localhost::$(DATA_DIR)/mdv/model/African/temp1.5m&temp1.5m   temp1.5m.colors      C      0 0 0   cart  1 0
+UKMO DP_1.5_m    mdvp:://localhost::$(DATA_DIR)/mdv/model/African/dewpt1.5m&dewpt1.5m dewptTemp1.5m.colors C      0 0 0   cart  1 0
+UKMO RH          mdvp:://localhost::$(DATA_DIR)/mdv/model/African/RH&RH               rel_humid.colors     %      0 0 0   cart  1 0
 
-Rw_DBZHC    Rw_DBZHC    mdvp:://localhost::$(DATA_DIR)/mdv/rwanda/radar/kigali&DBZHC   dbz.colors   dbz   0 0 0   cart  1 0 
-Rw_DBZHC_F  Rw_DBZHC_F  mdvp:://localhost::$(DATA_DIR)/mdv/rwanda/radar/kigali&DBZHC_F   dbz.colors   dbz   0 0 0   cart  1 0 
-Rw_VEL      Rw_VEL      mdvp:://localhost::$(DATA_DIR)/mdv/rwanda/radar/kigali&VEL   vel.colors   m/s   0 0 0   cart  1 0
-Rw_VEL_F    Rw_VEL_F    mdvp:://localhost::$(DATA_DIR)/mdv/rwanda/radar/kigali&VEL_F   vel.colors   m/s   0 0 0   cart  1 0
+UKMO precip      mdvp:://localhost::$(DATA_DIR)/mdv/model/African/precip&precip       precip_heavy.colors  kgm-2/h  0 0 0   cart  1 0
+UKMO precip_3hr_accum  mdvp:://localhost::$(DATA_DIR)/mdv/model/African/precip3hr&precip3hr precip_heavy.colors  kgm-2/h  0 0 0   cart  1 0
+UKMO precip_6hr_accum       mdvp:://localhost::$(DATA_DIR)/mdv/model/African/precip6hr&precip6hr precip_heavy.colors  kgm-2/h  0 0 0   cart  1 0
+UKMO ======      mdvp:://lakevic.rap.ucar.edu::$(HOME)/data/uae/junk&junk          dbz.colors   dbz   0 0 0   cart  1 0
 
-Rw_ZDR      Rw_ZDR      mdvp:://localhost::$(DATA_DIR)/mdv/rwanda/radar/kigali&ZDR   zdr.colors   db   0 0 0   cart  1 0
-Rw_ZDR_F    Rw_ZDR_F    mdvp:://localhost::$(DATA_DIR)/mdv/rwanda/radar/kigali&ZDR_F   zdr.colors   db   0 0 0   cart  1 0
-Rw_NCP      Rw_NCP      mdvp:://localhost::$(DATA_DIR)/mdv/rwanda/radar/kigali&NCP   ncp.colors   db   0 0 0   cart  1 0
-Rw_NCP_F    Rw_NCP_F    mdvp:://localhost::$(DATA_DIR)/mdv/rwanda/radar/kigali&NCP_F   ncp.colors   db   0 0 0   cart  1 0
-
-Rw_RHOHV    Rw_RHOHV    mdvp:://localhost::$(DATA_DIR)/mdv/rwanda/radar/kigali&RHOHV rhohv.colors   db   0 0 0   cart  1 0
-Rw_RHOHV_F  Rw_RHOHV_F  mdvp:://localhost::$(DATA_DIR)/mdv/rwanda/radar/kigali&RHOHV_F rhohv.colors   db   0 0 0   cart  1 0
-Rw_SNR      Rw_SNR      mdvp:://localhost::$(DATA_DIR)/mdv/rwanda/radar/kigali&SNR snr.colors   db   0 0 0   cart  1 0
-Rw_SNR_F    Rw_SNR_F    mdvp:://localhost::$(DATA_DIR)/mdv/rwanda/radar/kigali&SNR_F snr.colors   db   0 0 0   cart  1 0
-
-Rw_SNRHC    Rw_SNRHC    mdvp:://localhost::$(DATA_DIR)/mdv/rwanda/radar/kigali&SNRHC snr.colors   db   0 0 0   cart  1 0 
-Rw_SNRHC_F  Rw_SNRHC_F  mdvp:://localhost::$(DATA_DIR)/mdv/rwanda/radar/kigali&SNRHC_F snr.colors   db   0 0 0   cart  1 0
-Rw_SNRVC    Rw_SNRVC    mdvp:://localhost::$(DATA_DIR)/mdv/rwanda/radar/kigali&SNRVC snr.colors   db   0 0 0   cart  1 0
-Rw_SNRVC_F  Rw_SNRVC_F  mdvp:://localhost::$(DATA_DIR)/mdv/rwanda/radar/kigali&SNRVC_F snr.colors   db   0 0 0   cart  1 0
-
-Rw_DBMHC    Rw_DBMHC    mdvp:://localhost::$(DATA_DIR)/mdv/rwanda/radar/kigali&DBMHC dbz.colors   db   0 0 0   cart  1 0
-Rw_DBMVC    Rw_DBMVC    mdvp:://localhost::$(DATA_DIR)/mdv/rwanda/radar/kigali&DBMVC dbz.colors   db   0 0 0   cart  1 0
-Rw_WIDTH    Rw_WIDTH    mdvp:://localhost::$(DATA_DIR)/mdv/rwanda/radar/kigali&WIDTH width.colors   m/s   0 0 0   cart  1 0
-Rw_WIDTH_F  Rw_WIDTH_F  mdvp:://localhost::$(DATA_DIR)/mdv/rwanda/radar/kigali&WIDTH_F width.colors   m/s   0 0 0   cart  1 0
-
-Rw_PHIDP_F  Rw_PHIDP_F  mdvp:://localhost::$(DATA_DIR)/mdv/rwanda/radar/kigali&PHIDP_F phidp.colors   deg   0 0 0   cart  1 0
-Rw_KDP      Rw_KDP      mdvp:://localhost::$(DATA_DIR)/mdv/rwanda/radar/kigali&KDP   kdp.colors   deg/km   0 0 0   cart  1 0
-Rw_KDP_F    Rw_KDP_F    mdvp:://localhost::$(DATA_DIR)/mdv/rwanda/radar/kigali&KDP_F   kdp.colors   deg/km   0 0 0   cart  1 0
-Rw_CMD_FLAG Rw_CMD_FLAG mdvp:://localhost::$(DATA_DIR)/mdv/rwanda/radar/kigali&CMD_FLAG   dbz.colors   dbz   0 0 0   cart  1 0
+UKMO Uwind       mdvp:://localhost::$(DATA_DIR)/mdv/model/African/Winds&Uwind           vel.colors         m/s      0 0 0   cart  1 0
+UKMO Vwind       mdvp:://localhost::$(DATA_DIR)/mdv/model/African/Winds&Vwind           vel.colors         m/s      0 0 0   cart  1 0
+UKMO Uwind_10m   mdvp:://localhost::$(DATA_DIR)/mdv/model/African/Winds&Uwind10m        vel.colors         m/s      0 0 0   cart  1 0
+UKMO Vwind_10m   mdvp:://localhost::$(DATA_DIR)/mdv/model/African/Winds&Vwind10m        vel.colors         m/s      0 0 0   cart  1 0
 
 </GRIDS>
 
@@ -269,8 +262,8 @@ Rw_CMD_FLAG Rw_CMD_FLAG mdvp:://localhost::$(DATA_DIR)/mdv/rwanda/radar/kigali&C
 #
 # Legend_label  URL U V W_fieldnames units  Style [Color]
 #----------------------------------------------------------------------------
-#TREC    mdvp:://tundra::dia/mdv/ctrec/ftg&  #1 #2 None  m/s  0      yellow
-
+UKMO_3D  mdvp:://localhost::$(DATA_DIR)/mdv/model/African/Winds&  Uwind Vwind       None  m/s -1      yellow
+UKMO_10m mdvp:://localhost::$(DATA_DIR)/mdv/model/African/Winds&  Uwind10m Vwind10m None  m/s  1      green
 </WINDS>
 
 <MAPS>
@@ -756,8 +749,8 @@ cidd.max_adeg:               360.0
 
 # List of comma delimited local directories or HTTP URLs to search
 # Search . then each directory/URL in order 
-cidd.color_file_subdir:   http://front.eol.ucar.edu/color_scales
-cidd.map_file_subdir:     http://front.eol.ucar.edu/maps
+cidd.color_file_subdir:   ../color_scales,http://front.eol.ucar.edu/color_scales
+cidd.map_file_subdir:     ../color_scales,http://front.eol.ucar.edu/maps
 
 #
 # Station locator features
@@ -1252,7 +1245,7 @@ not be available.  For research/ post analysis most of them should be enabled.
 # 
 #
 #####################################################################################
-cidd.num_menu_bar_cells: 16
+cidd.num_menu_bar_cells: 17
 #
 cidd.menu_bar_label1: Fields...
 cidd.menu_bar_funct1: SHOW_DPD_MENU
@@ -1329,8 +1322,11 @@ cidd.menu_bar_funct14: LANDUSE_ONOFF
 cidd.menu_bar_label15: SYMPRODS...
 cidd.menu_bar_funct15: SHOW_PRODUCT_MENU
 #
-cidd.menu_bar_label16: Exit
-cidd.menu_bar_funct16: EXIT_BUTTON
+cidd.menu_bar_label16: Winds
+cidd.menu_bar_funct16: WINDS_ONOFF
+#
+cidd.menu_bar_label17: Exit
+cidd.menu_bar_funct17: EXIT_BUTTON
 #
 #cidd.menu_bar_label27: Commands
 #cidd.menu_bar_funct27: SHOW_CMD_MENU

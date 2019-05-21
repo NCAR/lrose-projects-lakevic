@@ -3,11 +3,17 @@
 
 # set the environment
 
-setenv PROJ_DIR /run/media/mdtest/lakevic/projDir
-setenv DATA_DIR /run/media/mdtest/lakevic/data
-setenv CIDD_BIN_DIR /run/media/mdtest/lakevic/cidd_build/bin
-setenv LROSE_BIN_DIR /run/media/mdtest/lakevic/lrose_build/bin
-setenv LROSE_SCRIPTS_DIR /run/media/mdtest/lakevic/lrose_build/scripts
+setenv PROJ_DIR ../../../../../projDir
+setenv DATA_DIR ../../../../../data
+setenv CIDD_BIN_DIR ../../../../../cidd_build/bin
+setenv LROSE_BIN_DIR ../../../../../lrose_build/bin
+setenv LROSE_SCRIPTS_DIR ../../../../../lrose_build/scripts
+
+#setenv PROJ_DIR /run/media/mdtest/lakevic/projDir
+#setenv DATA_DIR /run/media/mdtest/lakevic/data
+#setenv CIDD_BIN_DIR /run/media/mdtest/lakevic/cidd_build/bin
+#setenv LROSE_BIN_DIR /run/media/mdtest/lakevic/lrose_build/bin
+#setenv LROSE_SCRIPTS_DIR /run/media/mdtest/lakevic/lrose_build/scripts
 
 # start the servers
 
