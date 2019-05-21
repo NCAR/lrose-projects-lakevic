@@ -1,0 +1,39 @@
+# NAME temp.colors
+#
+#
+#
+# caron 	1/6/1993 16:16:23
+
+0     5 	DarkSlateGray1
+5     10 	SkyBlue1
+10    15     deep sky blue     
+15    16     medium slate blue 
+16    17     slate blue        
+17    18     blue4            
+18    19     MediumPurple4    
+19    20     DarkOrchid4      
+20    21     MediumOrchid4    
+21    22     dark orchid      
+22    23     purple           
+23    24     hot pink          
+24    25     pink        
+25    26 	DarkOrchid4
+26    27 	RoyalBlue4
+27    28       gray
+28    29 	SpringGreen2
+29    30 	SpringGreen3
+30    31 	SpringGreen4
+31    32 	yellow1
+32    33 	yellow3
+33    34 	gold1
+34    36 	DarkGoldenrod1
+36    38 	orange
+38    40 	sienna1
+40    42 	coral1
+42    50 	red1
+
+
+
+
+
+
