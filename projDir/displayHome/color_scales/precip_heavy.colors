@@ -1,0 +1,23 @@
+# awdl  1/13/1994 16:23:56
+#MIN     MAX     NAME        COLOR LABEL
+-0.0001 0.0001  black
+0.0001  0.5     gray25
+0.5	1.0	blue4
+1.0     2.0     medium blue
+2.0     4.0     medium slate blue
+4.0     6.0     cyan
+6.0     10      medium spring green
+10      15      SpringGreen3
+15      20      forest green
+20      25      green yellow
+25      30      yellow3
+30      40      yellow2
+40      50      gold
+50      60      orange
+60      75      coral
+75     100      tomato
+100    150      PaleVioletRed3 
+150    200      firebrick 
+200    250      red
+250    350      pink 
+350   10000     white
