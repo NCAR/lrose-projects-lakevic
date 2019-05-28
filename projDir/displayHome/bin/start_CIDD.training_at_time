@@ -1,0 +1,18 @@
+#! /bin/csh
+#
+
+echo "Usage: start_CIDD.training_at_time year month day hour min sec"
+echo "You must pad with leading zeros"
+echo "For example: start_CIDD.training_at_time year 2019 04 26 12 00 00"
+
+# set the environment
+
+source ./start_CIDD.training.core
+
+# start CIDD
+
+cd $PROJ_DIR/displayHome/params
+$CIDD_BIN_DIR/CIDD -font fixed -p CIDD.training -t $1$2$3$4$5$6 -v 2
+
+
+

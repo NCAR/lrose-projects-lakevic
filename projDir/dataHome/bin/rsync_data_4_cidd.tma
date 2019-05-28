@@ -58,25 +58,30 @@ mkdir -p mdv/terrain
 rsync -av /media/lakevic/data/mdv/model/* mdv/model
 rsync -av /media/lakevic/data/mdv/terrain/* mdv/terrain
 
-rsync -av /media/lakevic/data/mdv/satellite/20171218 mdv/satellite
-rsync -av /media/lakevic/data/mdv/satellite/20171219 mdv/satellite
-rsync -av /media/lakevic/data/mdv/satellite/20171220 mdv/satellite
+foreach dir (ir meteosat-11 vis wv)
 
-rsync -av /media/lakevic/data/mdv/satellite/20190114 mdv/satellite
-rsync -av /media/lakevic/data/mdv/satellite/20190115 mdv/satellite
-rsync -av /media/lakevic/data/mdv/satellite/20190116 mdv/satellite
+  mkdir -p mdv/satellite/${dir}
 
-rsync -av /media/lakevic/data/mdv/satellite/20190306 mdv/satellite
-rsync -av /media/lakevic/data/mdv/satellite/20190307 mdv/satellite
-rsync -av /media/lakevic/data/mdv/satellite/20190308 mdv/satellite
-rsync -av /media/lakevic/data/mdv/satellite/20190309 mdv/satellite
+  rsync -av /media/lakevic/data/mdv/satellite/${dir}/20171218 mdv/satellite/${dir}
+  rsync -av /media/lakevic/data/mdv/satellite/${dir}/20171219 mdv/satellite/${dir}
+  rsync -av /media/lakevic/data/mdv/satellite/${dir}/20171220 mdv/satellite/${dir}
 
-rsync -av /media/lakevic/data/mdv/satellite/20190330 mdv/satellite
-rsync -av /media/lakevic/data/mdv/satellite/20190331 mdv/satellite
-rsync -av /media/lakevic/data/mdv/satellite/20190401 mdv/satellite
+  rsync -av /media/lakevic/data/mdv/satellite/${dir}/20190114 mdv/satellite/${dir}
+  rsync -av /media/lakevic/data/mdv/satellite/${dir}/20190115 mdv/satellite/${dir}
+  rsync -av /media/lakevic/data/mdv/satellite/${dir}/20190116 mdv/satellite/${dir}
 
-rsync -av /media/lakevic/data/mdv/satellite/20190425 mdv/satellite
-rsync -av /media/lakevic/data/mdv/satellite/20190426 mdv/satellite
-rsync -av /media/lakevic/data/mdv/satellite/20190427 mdv/satellite
+  rsync -av /media/lakevic/data/mdv/satellite/${dir}/20190306 mdv/satellite/${dir}
+  rsync -av /media/lakevic/data/mdv/satellite/${dir}/20190307 mdv/satellite/${dir}
+  rsync -av /media/lakevic/data/mdv/satellite/${dir}/20190308 mdv/satellite/${dir}
+  rsync -av /media/lakevic/data/mdv/satellite/${dir}/20190309 mdv/satellite/${dir}
 
+  rsync -av /media/lakevic/data/mdv/satellite/${dir}/20190330 mdv/satellite/${dir}
+  rsync -av /media/lakevic/data/mdv/satellite/${dir}/20190331 mdv/satellite/${dir}
+  rsync -av /media/lakevic/data/mdv/satellite/${dir}/20190401 mdv/satellite/${dir}
+
+  rsync -av /media/lakevic/data/mdv/satellite/${dir}/20190425 mdv/satellite/${dir}
+  rsync -av /media/lakevic/data/mdv/satellite/${dir}/20190426 mdv/satellite/${dir}
+  rsync -av /media/lakevic/data/mdv/satellite/${dir}/20190427 mdv/satellite/${dir}
+
+end
 
