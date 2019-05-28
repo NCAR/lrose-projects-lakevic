@@ -39,8 +39,10 @@ When mounted, they appear as ```/media/lakevic```.
 
 The following links are available as short cuts:
 
-  ```localDisk -> git/lrose-projects-lakevic/projDir/displayHome/bin/```
-  ```usbDisk -> /media/lakevic/git/lrose-projects-lakevic/projDir/displayHome/bin```
+```
+  localDisk -> git/lrose-projects-lakevic/projDir/displayHome/bin/
+  usbDisk -> /media/lakevic/git/lrose-projects-lakevic/projDir/displayHome/bin
+```
 
 ## Running CIDD from the USB drives.
 
