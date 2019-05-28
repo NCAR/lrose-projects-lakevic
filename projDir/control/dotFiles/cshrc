@@ -21,32 +21,32 @@ endif
 #
 # for local RAP builds
 #
-setenv HOST_OS               LINUX_CX11
+setenv HOST_OS               LINUX_64_32MODE
 setenv MODEL		     WRF_RR
 
-setenv ANC_DIR               /home/nowcast/anc
-setenv DATA_PATH             /d1/nowcast/fieldData
+setenv ANC_DIR               /cidd
+setenv DATA_PATH             /data
 
 setenv RAP_INC_DIR           $ANC_DIR/include
 setenv RAP_LIB_DIR           $ANC_DIR/lib
 setenv RAP_BIN_DIR           $ANC_DIR/bin
 setenv RAP_MAN_DIR           $ANC_DIR/man
 setenv RAP_DOC_DIR           $ANC_DIR/doc
-setenv RAP_MAKE_INC_DIR      $ANC_DIR/make_include
-setenv RAP_MAKE_BIN_DIR      $ANC_DIR/make_bin
+setenv RAP_MAKE_INC_DIR      /cidd/git/lrose-core/codebase/make_include
+setenv RAP_MAKE_BIN_DIR      /cidd/git/lrose-core/codebase/make_bin
 
-setenv RAP_SHARED_INC_DIR    $ANC_DIR/include
-setenv RAP_SHARED_LIB_DIR    $ANC_DIR/lib
-setenv RAP_SHARED_BIN_DIR    $ANC_DIR/bin
-setenv RAP_SHARED_MAN_DIR    $ANC_DIR/man
-setenv RAP_SHARED_DOC_DIR    $ANC_DIR/doc
+setenv RAP_SHARED_INC_DIR    $RAP_INC_DIR
+setenv RAP_SHARED_LIB_DIR    $RAP_LIB_DIR
+setenv RAP_SHARED_BIN_DIR    $RAP_BIN_DIR
+setenv RAP_SHARED_MAN_DIR    $RAP_MAN_DIR
+setenv RAP_SHARED_DOC_DIR    $RAP_DOC_DIR
 
 #
 # for Nowcasting...
 #
 setenv PROJECT           lakevic
 set prompt = "`echo %B%U\[project-$PROJECT\]`%b%u ${HOST}:%~->"
-setenv PROJ_DIR          $ANC_DIR/projects/$PROJECT
+setenv PROJ_DIR          /cidd/git/lrose-projects-lakevic/projDir/
 
 setenv VDRAS_HOME        $PROJ_DIR/vdrasHome
 setenv ADVECT_HOME       $PROJ_DIR/advectHome
@@ -174,6 +174,7 @@ alias java      '$JAVA_HOME/bin/java'
 alias javac     '$JAVA_HOME/bin/javac'
 alias jar       '$JAVA_HOME/bin/jar'
 
+alias cp        'cp -i '
 alias ssh       'ssh -X '
 alias c         'clear'
 alias catw      'cat `which \!*`'
