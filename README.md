@@ -2,12 +2,11 @@
 
 ## CIDD install on EEC SUSE computers
 
-There are 4 EEC display machines at TMA:
+There are 3 EEC display machines at TMA:
 
 *  One 9355 unit in the ops center
 *  One 9355 in the severe weather office
 *  One 8051 unit in the modeling lab
-*  One 8051 unit in the ops center
 
 ## Machine specifications
 
