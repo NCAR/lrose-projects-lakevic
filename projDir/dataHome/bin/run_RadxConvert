@@ -1,0 +1,5 @@
+#! /bin/csh
+
+cd ~/projDir/dataHome/params
+
+RadxConvert -debug -params RadxConvert.mwanza -f /var/opt/edge/netcdf/20190428/*nc
